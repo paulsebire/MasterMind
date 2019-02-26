@@ -1,13 +1,21 @@
+import com.ocr.paul.RechercheChallenger;
+import com.ocr.paul.RechercheDefender;
+import com.ocr.paul.RechercheDuel;
 import com.ocr.paul.Utilities;
 
 public class Main {
 
+    private static Utilities utilities = new Utilities();
+    private static RechercheChallenger rechercheChallenger = new RechercheChallenger();
+    private static RechercheDefender rechercheDefender = new RechercheDefender();
+    private static RechercheDuel rechercheDuel = new RechercheDuel();
+
     public static void main(String[] args) {
-        Utilities utilities = new Utilities();
+
 
 
         boolean playAgain=true;
-        int gameChoice=0;
+        int gameChoice;
 
 
         while (playAgain){
@@ -22,6 +30,7 @@ public class Main {
                     gameChoice=Utilities.getTheNumber(1,3);
                     switch (gameChoice){
                         case 1:
+                            RechercheChallenger.rechercheChallenger();
                             break;
                         case 2:
                             break;
