@@ -10,7 +10,8 @@ public class RechercheChallenger {
     private static int nbTry;
 
     public static void rechercheChallenger(){
-
+        result="";
+        nbTry=0;
         randomCode = String.valueOf((int) (Math.random() * (double)Math.pow(10,codeSize)));
         randomCode=Utilities.codeInShape(randomCode);
         while (!result.equals("====")) {
@@ -19,8 +20,6 @@ public class RechercheChallenger {
             } else{
                 System.out.println("DOMMAGE! vous n'avez pas trouvé la solution");
                 System.out.println("La solution était: "+randomCode);
-                result="";
-                nbTry=0;
                 break;
             }
             codeFromUser = Utilities.getTheString();
@@ -29,8 +28,6 @@ public class RechercheChallenger {
             nbTry++;
             if (result.equals("====")) {
                 System.out.println("FELICITATTONS!!! Vous avez trouvé le code secret!");
-                result="";
-                nbTry=0;
                 break;
             }
         }

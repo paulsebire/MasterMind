@@ -37,7 +37,6 @@ public class Main {
                         case 3:
                             break;
                     }
-
                     break;
                 case 2:
                     System.out.println("Vous avez choisi le Jeu de MasterMind");
