@@ -13,31 +13,29 @@ public class RechercheChallenger {
 
         randomCode = String.valueOf((int) (Math.random() * (double)Math.pow(10,codeSize)));
         randomCode=Utilities.codeInShape(randomCode);
-        do {
-
-            codeFromUser = Utilities.getTheString();
-            result = breakTheCode(codeFromUser, randomCode);
-            System.out.println("Proposition: " + codeFromUser + " ==> Réponse: " + result);
-            nbTry++;
-
-            if (result.equals("====")) {
-                System.out.println("FELICITATTONS!!! Vous avez trouvé le code secret!");
-                break;
-            }
+        while (!result.equals("====")) {
             if (nbTry < allowedTry) {
                 System.out.println("ATTENTION! il ne reste plus que: " + (allowedTry - nbTry) + " essais");
             } else{
                 System.out.println("DOMMAGE! vous n'avez pas trouvé la solution");
                 System.out.println("La solution était: "+randomCode);
+                result="";
+                nbTry=0;
+                break;
             }
-
-        } while (nbTry < allowedTry);
-        return;
+            codeFromUser = Utilities.getTheString();
+            result = breakTheCode(codeFromUser, randomCode);
+            System.out.println("Proposition: " + codeFromUser + " ==> Réponse: " + result);
+            nbTry++;
+            if (result.equals("====")) {
+                System.out.println("FELICITATTONS!!! Vous avez trouvé le code secret!");
+                result="";
+                nbTry=0;
+                break;
+            }
+        }
 
     }
-
-
-
 
         public static String breakTheCode(String codeFromUser, String codeForIA) {
             int codeSize=4;

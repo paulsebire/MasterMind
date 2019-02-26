@@ -22,7 +22,7 @@ public class Main {
             System.out.println("A quel jeu désirez-vous jouer?");
             System.out.println("1 - Jeu de recherche");
             System.out.println("2 - Mastermind");
-            gameChoice=Utilities.getTheNumber(1,2);
+            gameChoice=utilities.getTheNumber(1,2);
             switch (gameChoice){
                 case 1:
                     System.out.println("Vous avez choisi le Jeu de Recherche");
@@ -30,7 +30,7 @@ public class Main {
                     gameChoice=Utilities.getTheNumber(1,3);
                     switch (gameChoice){
                         case 1:
-                            RechercheChallenger.rechercheChallenger();
+                            rechercheChallenger.rechercheChallenger();
                             break;
                         case 2:
                             break;
