@@ -2,7 +2,7 @@ package com.ocr.paul;
 
 public class MasterMindChallenger {
 
-    public static void masterMindChallenger(){
+    public static void masterMindChallengerMode(){
         String codeFromUser="";
         String codeFromIA = Utilities.getTheRandomColours();
         //System.out.println("codeFromIA: " + codeFromIA);

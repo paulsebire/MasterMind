@@ -8,6 +8,8 @@ public class Main {
     private static RechercheDuel rechercheDuel = new RechercheDuel();
     private static MasterMindChallenger masterMindChallenger= new MasterMindChallenger();
     private static MasterMindDefender masterMindDefender = new MasterMindDefender();
+    private static MasterMindDuel masterMindDuel = new MasterMindDuel();
+
     public static void main(String[] args) {
 
         boolean playAgain=true;
@@ -26,12 +28,15 @@ public class Main {
                     gameChoice=Utilities.getTheNumber(1,3);
                     switch (gameChoice){
                         case 1:
+                            System.out.println("Jeu de recherche - mode Challenger");
                             rechercheChallenger.rechercheChallenger();
                             break;
                         case 2:
+                            System.out.println("Jeu de recherche - mode Défenseur");
                             rechercheDefender.rechercheDefender();
                             break;
                         case 3:
+                            System.out.println("Jeu de recherche - mode Duel VS IA");
                             rechercheDuel.rechercheDuel();
                             break;
                     }
@@ -42,13 +47,16 @@ public class Main {
                     gameChoice=Utilities.getTheNumber(1,3);
                    switch (gameChoice){
                         case 1:
-                            masterMindChallenger.masterMindChallenger();
+                            System.out.println("Jeu du MasterMind - mode Challenger");
+                            masterMindChallenger.masterMindChallengerMode();
                             break;
                         case 2:
-                            masterMindDefender.masterMindDefender();
+                            System.out.println("Jeu du MasterMind - mode Défenseur");
+                            masterMindDefender.masterMindDefenderMode();
                             break;
                         case 3:
-
+                            System.out.println("Jeu du MasterMind - mode Duel VS IA");
+                            masterMindDuel.masterMindDuel();
                             break;
                     }
                     break;

@@ -3,16 +3,13 @@ package com.ocr.paul;
 public class MasterMindDefender {
     static StringBuilder resultFromIA= new StringBuilder();
 
-    public static void masterMindDefender(){
+    public static void masterMindDefenderMode(){
         String codeFromUser=Utilities.getTheColours();
         String codeFromIA=Utilities.getTheRandomColours();
         System.out.println("L'ordinateur propose le code suivant: "+codeFromIA);
         do {
 
-            System.out.println("Combien il y a-t-il de couleurs bien placées?");
-            Utilities.getTheNumber(0,4);
-            System.out.println("Combien il y a-t-il de couleurs mal placées?");
-            Utilities.getTheNumber(0,4);
+            Utilities.askGoodColours();
             codeFromIA=mastermindDefender(codeFromUser,codeFromIA);
             System.out.println("L'ordinateur propose le code suivant: "+codeFromIA);
         }while (!codeFromIA.equals(codeFromUser));

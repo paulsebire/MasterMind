@@ -179,4 +179,35 @@ public class Utilities {
         } while (!responseIsGood);
         return stringFromUser;
     }
+
+    public static boolean getTheMastermindResultDuel (String codeFromUser, String proposition,String codeFromIA, boolean successIA){
+        System.out.println("on est dans le getthemastermindresultduel");
+        if (proposition.equals(codeFromUser)&& successIA){
+            System.out.println("Il y a EGALITE");
+            return true;
+        }
+        if (proposition.equals(codeFromUser)){
+            System.out.println("L'IA a trouvé votre code, vous avez PERDU");
+            System.out.println("La solution du code de la machnie était: "+ codeFromIA);
+            return true;
+        }
+        if (successIA){
+            System.out.println("Vous avez trouvé le code de l'IA, vous avez GAGNE");
+            return true;
+        }return false;
+    }
+
+    public static void askGoodColours(){
+        System.out.println("Combien il y a-t-il de couleurs bien placées?");
+        getTheNumber(0,4);
+        System.out.println("Combien il y a-t-il de couleurs mal placées?");
+        getTheNumber(0,4);
+    }
+
+    public static void displayNbTour (int nbTours){
+        System.out.println("-------------------------------------------------------------");
+        System.out.println("TOUR NUMERO: " + nbTours);
+        System.out.println("-------------------------------------------------------------");
+
+    }
 }

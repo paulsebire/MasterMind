@@ -33,9 +33,7 @@ public class RechercheDuel {
         while (!victory){
 
             nbTours++;
-            System.out.println("-------------------------------------------------------------");
-            System.out.println("TOUR NUMERO: "+ nbTours);
-            System.out.println("-------------------------------------------------------------");
+            Utilities.displayNbTour(nbTours);
             System.out.println("l'IA propose le code  suivant: "+proposition);
             responseFromUser=Utilities.getTheRechercheResponse();
             proposition = RechercheDefender.iABreakYourCode(responseFromUser,proposition,nbTours-1);
