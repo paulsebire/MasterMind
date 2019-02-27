@@ -112,4 +112,19 @@ public class Utilities {
         }while (!responseIsGood) ;
         return stringFromUser;
     }
+    public static boolean getTheResult(String responseFromUser,String result,String codeFromIA){
+        if (responseFromUser.equals("====") && result.equals("====")){
+            System.out.println("Il y a EGALITE");
+            return true;
+        }
+        if (responseFromUser.equals("====")){
+            System.out.println("L'IA a trouvé votre code, vous avez PERDU");
+            System.out.println("La solution du code de la machnie était: "+ codeFromIA);
+            return true;
+        }
+        if ( result.equals("====")){
+            System.out.println("Vous avez trouvé le code de l'IA, vous avez GAGNE");
+            return true;
+        }return false;
+    }
 }

@@ -36,6 +36,7 @@ public class Main {
                             rechercheDefender.rechercheDefender();
                             break;
                         case 3:
+                            rechercheDuel.rechercheDuel();
                             break;
                     }
                     break;
@@ -43,14 +44,17 @@ public class Main {
                     System.out.println("Vous avez choisi le Jeu de MasterMind");
                     System.out.println("Veuillez choisir le mode de jeu: 1-Challenger, 2-Défenseur, 3-Duel VS IA");
                     gameChoice=Utilities.getTheNumber(1,3);
-                   /* switch (gameChoice){
+                   switch (gameChoice){
                         case 1:
+
                             break;
                         case 2:
+
                             break;
                         case 3:
+
                             break;
-                    }*/
+                    }
                     break;
             }
             System.out.println("Voulez-vous faire une autre partie? 1-OUI, 2-NON");
