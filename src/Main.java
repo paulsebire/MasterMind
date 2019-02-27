@@ -33,6 +33,7 @@ public class Main {
                             rechercheChallenger.rechercheChallenger();
                             break;
                         case 2:
+                            rechercheDefender.rechercheDefender();
                             break;
                         case 3:
                             break;

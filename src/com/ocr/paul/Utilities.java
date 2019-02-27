@@ -81,4 +81,35 @@ public class Utilities {
         }
         return proposition;
     }
+    public static String getTheRechercheResponse(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Veuillez répondre à la proposition de l'IA (avec +,-,=)");
+        String stringFromUser="";
+        boolean responseIsGood= false;
+        do {
+            try {
+                stringFromUser = sc.nextLine();
+                if  (stringFromUser.length()==codeSize){
+                    for (int i=0;i<stringFromUser.length();i++){
+                        if (stringFromUser.charAt(i)=='+' || stringFromUser.charAt(i)=='-' || stringFromUser.charAt(i)=='='){
+                            responseIsGood=true;
+                        }else {
+                            responseIsGood=false;
+                            System.out.println("la réponse ne peut contenir que les symboles +,-,=");
+                            break;
+                        }
+                    }
+
+                }else {
+                    responseIsGood = false;
+                    System.out.println("Veuillez saisir "+codeSize+" symboles (+,-,=)");
+                }
+            } catch (InputMismatchException e) {
+                sc.next();
+                responseIsGood = false;
+                System.out.println("Veuillez saisir "+codeSize+" symboles (+,-,=)");
+            }
+        }while (!responseIsGood) ;
+        return stringFromUser;
+    }
 }
