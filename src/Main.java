@@ -1,7 +1,4 @@
-import com.ocr.paul.RechercheChallenger;
-import com.ocr.paul.RechercheDefender;
-import com.ocr.paul.RechercheDuel;
-import com.ocr.paul.Utilities;
+import com.ocr.paul.*;
 
 public class Main {
 
@@ -9,10 +6,9 @@ public class Main {
     private static RechercheChallenger rechercheChallenger = new RechercheChallenger();
     private static RechercheDefender rechercheDefender = new RechercheDefender();
     private static RechercheDuel rechercheDuel = new RechercheDuel();
+    private static MasterMindChallenger masterMindChallenger= new MasterMindChallenger();
 
     public static void main(String[] args) {
-
-
 
         boolean playAgain=true;
         int gameChoice;
@@ -46,7 +42,7 @@ public class Main {
                     gameChoice=Utilities.getTheNumber(1,3);
                    switch (gameChoice){
                         case 1:
-
+                            masterMindChallenger.masterMindChallenger();
                             break;
                         case 2:
 

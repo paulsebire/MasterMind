@@ -70,7 +70,6 @@ public class RechercheDefender {
                 codeAdapt.append(number);
             }
         }
-
         proposition = codeAdapt.toString();
         return proposition;
     }
