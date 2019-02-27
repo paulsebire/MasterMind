@@ -7,7 +7,6 @@ public class MasterMindDuel {
         boolean victory=false;
         int nbTours=1;
         boolean successUser =false;
-        System.out.println("Bienvenue dans le mode duel");
         System.out.println("--------------------------------------------------------------");
         System.out.println("Veuillez saisir votre code secret");
         String codeFromUser = Utilities.getTheColours();

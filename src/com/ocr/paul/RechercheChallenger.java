@@ -22,6 +22,7 @@ public class RechercheChallenger {
                 System.out.println("La solution était: "+randomCode);
                 break;
             }
+            System.out.println("Que pensez-vous être le code de l'ordinateur?");
             codeFromUser = Utilities.getTheString();
             result = breakTheCode(codeFromUser, randomCode);
             System.out.println("Proposition: " + codeFromUser + " ==> Réponse: " + result);
@@ -38,9 +39,9 @@ public class RechercheChallenger {
             int codeSize=4;
             StringBuilder resultStringBuilder=new StringBuilder("");
             for (int i=0;i<codeSize;i++){
-                if (Character.getNumericValue(codeFromUser.charAt(i))==Character.getNumericValue(codeForIA.charAt(i))){
+                if (Utilities.compareChar(codeFromUser.charAt(i),codeForIA.charAt(i))==0){
                     resultStringBuilder.append('=');
-                }else if (Character.getNumericValue(codeFromUser.charAt(i))<Character.getNumericValue(codeForIA.charAt(i))){
+                }else if (Utilities.compareChar(codeFromUser.charAt(i),codeForIA.charAt(i))==-1){
                     resultStringBuilder.append('+');
                 }else resultStringBuilder.append('-');
             }

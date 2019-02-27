@@ -58,12 +58,16 @@ public class RechercheDefender {
             if (responseFromUser.charAt(i) == '+') {
                 number = (int) ((Character.getNumericValue(proposition.charAt(i)) + 9) / 2);
                 if (count > 1 && codeHistory[count - 1][i] > codeHistory[count][i]) {
-                    number = (int) ((codeHistory[count - 2][i] + codeHistory[count- 1][i]) / 2);
+                    number = (int) ((codeHistory[count - 1][i] + codeHistory[count][i]) / 2);
                 }
                 if (count > 1 && codeHistory[count][i] == 8) number = 9;
                 codeAdapt.append(number);
             } else if (responseFromUser.charAt(i) == '-') {
                 number = (int) ((Character.getNumericValue(proposition.charAt(i))) / 2);
+                if (count > 1 && codeHistory[count - 1][i] < codeHistory[count][i]) {
+                    number = (int) ((codeHistory[count - 1][i] + codeHistory[count][i]) / 2);
+                }
+                if (count > 1 && codeHistory[count][i] == 1) number = 0;
                 codeAdapt.append(number);
             } else {
                 number = (Character.getNumericValue(proposition.charAt(i)));

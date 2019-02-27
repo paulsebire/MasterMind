@@ -181,7 +181,6 @@ public class Utilities {
     }
 
     public static boolean getTheMastermindResultDuel (String codeFromUser, String proposition,String codeFromIA, boolean successIA){
-        System.out.println("on est dans le getthemastermindresultduel");
         if (proposition.equals(codeFromUser)&& successIA){
             System.out.println("Il y a EGALITE");
             return true;
@@ -209,5 +208,11 @@ public class Utilities {
         System.out.println("TOUR NUMERO: " + nbTours);
         System.out.println("-------------------------------------------------------------");
 
+    }
+
+    public static int compareChar (char a, char b){
+        if (Character.getNumericValue(a)==Character.getNumericValue(b))return 0;
+        else if (Character.getNumericValue(a)>Character.getNumericValue(b)) return 1;
+            else return -1;
     }
 }

@@ -22,7 +22,7 @@ public class MasterMindDefender {
     public static String mastermindDefender (String codeFromUser, String codeFromIA){
         resultFromIA.setLength(0);
         for (int i=0;i<codeFromUser.length();i++){
-            if (Character.getNumericValue(codeFromIA.charAt(i))==Character.getNumericValue(codeFromUser.charAt(i))){
+            if (Utilities.compareChar(codeFromIA.charAt(i),codeFromUser.charAt(i))==0){
                 resultFromIA.append(codeFromIA.charAt(i));
             }else resultFromIA.append( 1 + (int)(Math.random()*4));
         }

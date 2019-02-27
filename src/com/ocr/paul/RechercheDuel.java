@@ -7,7 +7,6 @@ public class RechercheDuel {
         boolean victory=false;
         //String codeFromUserFinding="";
         int nbTours=1;
-        System.out.println("Bienvenue dans le mode duel");
         System.out.println("--------------------------------------------------------------");
         System.out.println("Veuillez saisir votre code secret");
         String codeFromUser = Utilities.getTheString();

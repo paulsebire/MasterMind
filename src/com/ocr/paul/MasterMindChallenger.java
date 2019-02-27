@@ -25,7 +25,7 @@ public class MasterMindChallenger {
         int bonnePosition=0;
 
         for (int i=0;i<codeFromIA.length();i++){
-            if (Character.getNumericValue(codeFromUser.charAt(i))==Character.getNumericValue(codeFromIA.charAt(i))){
+            if (Utilities.compareChar(codeFromUser.charAt(i),codeFromIA.charAt(i))==0){
                 validation[i]=true;
                 bonnePosition++;
             } else{
@@ -34,11 +34,11 @@ public class MasterMindChallenger {
         }
 
         for (int i=0;i<codeFromIA.length();i++){
-            if (Character.getNumericValue(codeFromUser.charAt(i))!=Character.getNumericValue(codeFromIA.charAt(i))){
+            if (Utilities.compareChar(codeFromUser.charAt(i),codeFromIA.charAt(i))!=0){
                 int j=0;
                 boolean presence=false;
                 while (j<codeFromIA.length() && !presence){
-                    if (!validation[j]&&(Character.getNumericValue(codeFromUser.charAt(j))==Character.getNumericValue(codeFromIA.charAt(i)))){
+                    if (!validation[j]&&(Utilities.compareChar(codeFromUser.charAt(j),codeFromIA.charAt(i))==0)){
                         nbPresence++;
                         validation[j]=true;
                         presence=true;
