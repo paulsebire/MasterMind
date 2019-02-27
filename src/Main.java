@@ -7,7 +7,7 @@ public class Main {
     private static RechercheDefender rechercheDefender = new RechercheDefender();
     private static RechercheDuel rechercheDuel = new RechercheDuel();
     private static MasterMindChallenger masterMindChallenger= new MasterMindChallenger();
-
+    private static MasterMindDefender masterMindDefender = new MasterMindDefender();
     public static void main(String[] args) {
 
         boolean playAgain=true;
@@ -45,7 +45,7 @@ public class Main {
                             masterMindChallenger.masterMindChallenger();
                             break;
                         case 2:
-
+                            masterMindDefender.masterMindDefender();
                             break;
                         case 3:
 
