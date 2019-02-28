@@ -11,14 +11,14 @@ public class RechercheDefender {
          int nbTry = 0;
          int count = 0;
         String codeFromUser = Utilities.getTheString();
-        String proposition = String.valueOf((int) (Math.random() * (double) Math.pow(10, codeSize)));
+        String proposition = String.valueOf((int) (Math.random() * Math.pow(10, codeSize)));
         System.out.println("Votre code secret est: " + codeFromUser);
         proposition = Utilities.codeInShape(proposition);
         System.out.println("L'IA propose le code suivant: " + proposition);
         System.out.println("ATTENTION! il ne reste plus que: " + (allowedTry - nbTry) + " essais à l'IA");
         nbTry++;
         String responseFromUser = Utilities.getTheRechercheResponse();
-        if (responseFromUser.equals("====")) {
+        if (responseFromUser.equals(Utilities.solution)) {
             System.out.println("L'IA a trouvé le code!!");
             return;
         }
@@ -31,7 +31,7 @@ public class RechercheDefender {
             proposition = iABreakYourCode(responseFromUser, proposition, count);
             System.out.println("l'IA propose le code  suivant: " + proposition);
             responseFromUser = Utilities.getTheRechercheResponse();
-            if (responseFromUser.equals("====")) {
+            if (responseFromUser.equals(Utilities.solution)) {
                 System.out.println("L'IA a trouvé le code!!");
                 break;
             }
@@ -56,16 +56,16 @@ public class RechercheDefender {
         }
         for (int i = 0; i < responseFromUser.length(); i++) {
             if (responseFromUser.charAt(i) == '+') {
-                number = (int) ((Character.getNumericValue(proposition.charAt(i)) + 9) / 2);
+                number = (Character.getNumericValue(proposition.charAt(i)) + 9) / 2;
                 if (count > 1 && codeHistory[count - 1][i] > codeHistory[count][i]) {
-                    number = (int) ((codeHistory[count - 1][i] + codeHistory[count][i]) / 2);
+                    number =(codeHistory[count - 1][i] + codeHistory[count][i]) / 2;
                 }
                 if (count > 1 && codeHistory[count][i] == 8) number = 9;
                 codeAdapt.append(number);
             } else if (responseFromUser.charAt(i) == '-') {
-                number = (int) ((Character.getNumericValue(proposition.charAt(i))) / 2);
+                number = (Character.getNumericValue(proposition.charAt(i))) / 2;
                 if (count > 1 && codeHistory[count - 1][i] < codeHistory[count][i]) {
-                    number = (int) ((codeHistory[count - 1][i] + codeHistory[count][i]) / 2);
+                    number =(codeHistory[count - 1][i] + codeHistory[count][i]) / 2;
                 }
                 if (count > 1 && codeHistory[count][i] == 1) number = 0;
                 codeAdapt.append(number);

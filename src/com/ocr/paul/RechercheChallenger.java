@@ -49,8 +49,4 @@ public class RechercheChallenger {
             return resultStringBuilder.toString();
         }
 
-
-
-
-
 }

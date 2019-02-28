@@ -7,7 +7,7 @@ public class Utilities {
     static int codeSize = 4;
     static Scanner sc = new Scanner(System.in);
     static int number = 0;
-
+    static String solution = stringOfEquals(codeSize);
     public static int getTheNumber(int min, int max) {
 
         boolean responseIsGood;
@@ -73,14 +73,14 @@ public class Utilities {
     }
 
     public static String codeInShape(String proposition) {
-        StringBuilder codeStringbuilder = new StringBuilder();
+        StringBuilder codeStringBuilder = new StringBuilder();
         if (proposition.length() != codeSize) {
             for (int k = 0; k < codeSize - proposition.length(); k++) {
-                codeStringbuilder.append("0");
+                codeStringBuilder.append("0");
             }
-            codeStringbuilder.append(proposition);
-            proposition = codeStringbuilder.toString();
-            codeStringbuilder.setLength(0);
+            codeStringBuilder.append(proposition);
+            proposition = codeStringBuilder.toString();
+            codeStringBuilder.setLength(0);
         }
         return proposition;
     }
@@ -118,16 +118,17 @@ public class Utilities {
     }
 
     public static boolean getTheResult(String responseFromUser, String result, String codeFromIA) {
-        if (responseFromUser.equals("====") && result.equals("====")) {
+
+        if (responseFromUser.equals(solution) && result.equals(solution)) {
             System.out.println("Il y a EGALITE");
             return true;
         }
-        if (responseFromUser.equals("====")) {
+        if (responseFromUser.equals(solution)) {
             System.out.println("L'IA a trouvé votre code, vous avez PERDU");
-            System.out.println("La solution du code de la machnie était: " + codeFromIA);
+            System.out.println("La solution du code de la machine était: " + codeFromIA);
             return true;
         }
-        if (result.equals("====")) {
+        if (result.equals(solution)) {
             System.out.println("Vous avez trouvé le code de l'IA, vous avez GAGNE");
             return true;
         }
@@ -214,5 +215,14 @@ public class Utilities {
         if (Character.getNumericValue(a)==Character.getNumericValue(b))return 0;
         else if (Character.getNumericValue(a)>Character.getNumericValue(b)) return 1;
             else return -1;
+    }
+
+    public static String stringOfEquals (int codeSize){
+        StringBuilder equals = new StringBuilder();
+
+        for (int i=0;i<codeSize;i++){
+            equals.append("=");
+        }
+        return equals.toString();
     }
 }
