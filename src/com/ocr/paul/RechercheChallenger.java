@@ -5,14 +5,13 @@ public class RechercheChallenger {
     private static String randomCode="";
     private static String result="";
     private static String codeFromUser="";
-    private static int codeSize=4;
     private static int allowedTry=5;
     private static int nbTry;
 
     public static void rechercheChallenger(){
         result="";
         nbTry=0;
-        randomCode = String.valueOf((int) (Math.random() * (double)Math.pow(10,codeSize)));
+        randomCode = String.valueOf((int) (Math.random() * (double)Math.pow(10,Utilities.codeSize)));
         randomCode=Utilities.codeInShape(randomCode);
         while (!result.equals("====")) {
             if (nbTry < allowedTry) {

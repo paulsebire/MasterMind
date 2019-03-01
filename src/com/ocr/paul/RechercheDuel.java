@@ -1,7 +1,6 @@
 package com.ocr.paul;
 
 public class RechercheDuel {
-    private static int codeSize = 4;
 
     public static void rechercheDuel(){
         boolean victory=false;
@@ -10,8 +9,8 @@ public class RechercheDuel {
         System.out.println("Veuillez saisir votre code secret");
         String codeFromUser = Utilities.getTheString();
         System.out.println("Votre code secret est: " + codeFromUser);
-        String codeFromIA = String.valueOf((int) (Math.random() * (double)Math.pow(10,codeSize)));
-        String proposition=String.valueOf((int) (Math.random() * (double)Math.pow(10,codeSize)));
+        String codeFromIA = String.valueOf((int) (Math.random() * (double)Math.pow(10,Utilities.codeSize)));
+        String proposition=String.valueOf((int) (Math.random() * (double)Math.pow(10,Utilities.codeSize)));
         codeFromIA=Utilities.codeInShape(codeFromIA);
         proposition=Utilities.codeInShape(proposition);
         System.out.println("L'IA a choisi son code secret");

@@ -4,10 +4,11 @@ import java.util.Scanner;
 import static java.lang.Character.isDigit;
 
 public class Utilities {
-    static int codeSize = 4;
+    static int codeSize = 6;
     static Scanner sc = new Scanner(System.in);
     static int number = 0;
     static String solution = stringOfEquals(codeSize);
+
     public static int getTheNumber(int min, int max) {
 
         boolean responseIsGood;

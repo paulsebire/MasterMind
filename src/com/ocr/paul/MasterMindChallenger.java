@@ -5,7 +5,6 @@ public class MasterMindChallenger {
     public static void masterMindChallengerMode(){
         String codeFromUser="";
         String codeFromIA = Utilities.getTheRandomColours();
-        //System.out.println("codeFromIA: " + codeFromIA);
 
         boolean success=false;
         do {

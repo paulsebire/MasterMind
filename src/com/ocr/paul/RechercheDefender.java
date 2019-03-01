@@ -3,15 +3,14 @@ package com.ocr.paul;
 public class RechercheDefender {
     private static StringBuilder codeAdapt = new StringBuilder("");
     private static int allowedTry = 5;
-    private static int codeSize = 4;
-
+    private static int[][] codeHistory = new int[100][Utilities.codeSize];
 
     public static void rechercheDefender() {
 
          int nbTry = 0;
          int count = 0;
         String codeFromUser = Utilities.getTheString();
-        String proposition = String.valueOf((int) (Math.random() * Math.pow(10, codeSize)));
+        String proposition = String.valueOf((int) (Math.random() * Math.pow(10, Utilities.codeSize)));
         System.out.println("Votre code secret est: " + codeFromUser);
         proposition = Utilities.codeInShape(proposition);
         System.out.println("L'IA propose le code suivant: " + proposition);
@@ -44,8 +43,8 @@ public class RechercheDefender {
 
 
     public static String iABreakYourCode(String responseFromUser, String proposition, int count) {
-        int[][] codeHistory = new int[10][4];
-        int[] propTab = new int[4];
+
+        int[] propTab = new int[Utilities.codeSize];
         int number;
         codeAdapt.setLength(0);
         for (int i = 0; i < proposition.length(); i++) {
