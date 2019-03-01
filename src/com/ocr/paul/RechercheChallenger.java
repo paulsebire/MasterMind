@@ -16,13 +16,6 @@ public class RechercheChallenger {
         while (!result.equals(Utilities.solution)) {
             playAgain=Utilities.allowedToPlay(nbTry,randomCode);
             if (!playAgain)break;
-            /*if (nbTry < Utilities.allowedTry) {
-                System.out.println("ATTENTION! il ne reste plus que: " + (Utilities.allowedTry - nbTry) + " essais");
-            } else{
-                System.out.println("DOMMAGE! vous n'avez pas trouvé la solution");
-                System.out.println("La solution était: "+randomCode);
-                break;
-            }*/
             System.out.println("Que pensez-vous être le code de l'ordinateur?");
             codeFromUser = Utilities.getTheString();
             result = breakTheCode(codeFromUser, randomCode);

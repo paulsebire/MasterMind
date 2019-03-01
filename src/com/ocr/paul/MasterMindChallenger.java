@@ -11,14 +11,6 @@ public class MasterMindChallenger {
         while (!success) {
             playAgain=Utilities.allowedToPlay(nbTry,codeFromIA);
             if (!playAgain)break;
-            /*if (nbTry < Utilities.allowedTry) {
-                System.out.println("ATTENTION! il ne reste plus que: " + (Utilities.allowedTry - nbTry) + " essais");
-            } else{
-                System.out.println("DOMMAGE! vous n'avez pas trouvé la solution");
-                System.out.println("La solution était: "+codeFromIA);
-                break;
-            }*/
-
             System.out.println("Que pensez-vous être la combianaison de l'ordinateur?");
             codeFromUser = Utilities.getTheColours();
             System.out.println("vous proposez les couleurs suivantes: " + codeFromUser);
