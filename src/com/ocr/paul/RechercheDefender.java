@@ -2,7 +2,6 @@ package com.ocr.paul;
 
 public class RechercheDefender {
     private static StringBuilder codeAdapt = new StringBuilder("");
-    private static int allowedTry = 5;
     private static int[][] codeHistory = new int[100][Utilities.codeSize];
 
     public static void rechercheDefender() {
@@ -14,7 +13,7 @@ public class RechercheDefender {
         System.out.println("Votre code secret est: " + codeFromUser);
         proposition = Utilities.codeInShape(proposition);
         System.out.println("L'IA propose le code suivant: " + proposition);
-        System.out.println("ATTENTION! il ne reste plus que: " + (allowedTry - nbTry) + " essais à l'IA");
+        System.out.println("ATTENTION! il ne reste plus que: " + (Utilities.allowedTry - nbTry) + " essais à l'IA");
         nbTry++;
         String responseFromUser = Utilities.getTheRechercheResponse();
         if (responseFromUser.equals(Utilities.solution)) {
@@ -23,7 +22,7 @@ public class RechercheDefender {
         }
         do {
 
-            if (nbTry >= allowedTry) {
+            if (nbTry >= Utilities.allowedTry) {
                 System.out.println("FELICITATION!! Vous avez vaincu la machine");
                 break;
             } else System.out.println("ATTENTION! il ne reste plus que: " + (5 - nbTry) + " essais à l'IA");
@@ -36,7 +35,7 @@ public class RechercheDefender {
             }
             nbTry++;
             count++;
-        } while (nbTry < allowedTry + 1);
+        } while (nbTry <= Utilities.allowedTry );
         return;
 
     }

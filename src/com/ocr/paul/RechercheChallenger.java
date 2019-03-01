@@ -5,7 +5,6 @@ public class RechercheChallenger {
     private static String randomCode="";
     private static String result="";
     private static String codeFromUser="";
-    private static int allowedTry=5;
     private static int nbTry;
 
     public static void rechercheChallenger(){
@@ -14,8 +13,8 @@ public class RechercheChallenger {
         randomCode = String.valueOf((int) (Math.random() * (double)Math.pow(10,Utilities.codeSize)));
         randomCode=Utilities.codeInShape(randomCode);
         while (!result.equals("====")) {
-            if (nbTry < allowedTry) {
-                System.out.println("ATTENTION! il ne reste plus que: " + (allowedTry - nbTry) + " essais");
+            if (nbTry < Utilities.allowedTry) {
+                System.out.println("ATTENTION! il ne reste plus que: " + (Utilities.allowedTry - nbTry) + " essais");
             } else{
                 System.out.println("DOMMAGE! vous n'avez pas trouvé la solution");
                 System.out.println("La solution était: "+randomCode);

@@ -4,8 +4,9 @@ import java.util.Scanner;
 import static java.lang.Character.isDigit;
 
 public class Utilities {
-    static int codeSize = 6;
-    static int numberOfColours=7;
+    static int codeSize = 4;
+    static int numberOfColours=5;
+    static int allowedTry = 5;
     static Scanner sc = new Scanner(System.in);
     static int number = 0;
     static String solution = stringOfEquals(codeSize);
@@ -178,22 +179,22 @@ public class Utilities {
                                 responseIsGood = true;
                             } else {
                                 responseIsGood = false;
-                                System.out.println("le code ne peut contenir que les chiffres compris entre "+minColours+" et "+maxColours);
+                                System.out.println("1-le code ne peut contenir que les chiffres compris entre "+minColours+" et "+maxColours);
                                 break;
                             }
                         } else {
                             responseIsGood = false;
-                            System.out.println("le code ne peut contenir que les chiffres compris entre "+minColours+" et "+maxColours);
+                            System.out.println("2-le code ne peut contenir que les chiffres compris entre "+minColours+" et "+maxColours);
                             break;
                         }
                     }
                 } else {
                     responseIsGood = false;
-                    System.out.println("Veuillez saisir une combinaison de " + codeSize + " chiffres compris entre "+minColours+" et "+maxColours);
+                    System.out.println("3-Veuillez saisir une combinaison de " + codeSize + " chiffres compris entre "+minColours+" et "+maxColours);
                 }
             } catch (InputMismatchException e) {
                 responseIsGood = false;
-                System.out.println("Veuillez saisir " + codeSize + " chiffres compris entre "+minColours+" et "+maxColours);
+                System.out.println("4-Veuillez saisir " + codeSize + " chiffres compris entre "+minColours+" et "+maxColours);
                 sc.next();
             }
         } while (!responseIsGood);
