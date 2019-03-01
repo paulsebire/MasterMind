@@ -14,7 +14,7 @@ public class Main {
 
         boolean playAgain=true;
         int gameChoice;
-
+        utilities.fixTheColoursBounds();
 
         while (playAgain){
             System.out.println("A quel jeu désirez-vous jouer?");

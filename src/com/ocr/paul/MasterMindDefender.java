@@ -24,7 +24,7 @@ public class MasterMindDefender {
         for (int i=0;i<codeFromUser.length();i++){
             if (Utilities.compareChar(codeFromIA.charAt(i),codeFromUser.charAt(i))==0){
                 resultFromIA.append(codeFromIA.charAt(i));
-            }else resultFromIA.append( 1 + (int)(Math.random()*4));
+            }else resultFromIA.append( Utilities.minColours + (int)(Math.random()*Utilities.maxColours));
         }
         codeFromIA=resultFromIA.toString();
         return codeFromIA;

@@ -5,9 +5,12 @@ import static java.lang.Character.isDigit;
 
 public class Utilities {
     static int codeSize = 6;
+    static int numberOfColours=7;
     static Scanner sc = new Scanner(System.in);
     static int number = 0;
     static String solution = stringOfEquals(codeSize);
+    static int minColours;
+    static int maxColours;
 
     public static int getTheNumber(int min, int max) {
 
@@ -136,12 +139,27 @@ public class Utilities {
         return false;
     }
 
+    public void fixTheColoursBounds (){
+        if (numberOfColours<4) numberOfColours=4;
+        else if (numberOfColours>10) numberOfColours=10;
+
+        if (numberOfColours!=10){
+            minColours =1;
+            maxColours= numberOfColours;
+        } else{
+            minColours=0;
+            maxColours=9;
+        }
+    }
+
     public static String getTheRandomColours() {
         String randomColours = "";
         StringBuilder tempColours = new StringBuilder();
         tempColours.setLength(0);
+
+
         while (tempColours.length() < codeSize) {
-            tempColours.append(1 + (int) (Math.random() * 4));
+            tempColours.append(minColours + (int) (Math.random() * numberOfColours));
         }
         randomColours = tempColours.toString();
         return randomColours;
@@ -156,26 +174,26 @@ public class Utilities {
                 if (stringFromUser.length() == codeSize) {
                     for (int i = 0; i < stringFromUser.length(); i++) {
                         if (isDigit(stringFromUser.charAt(i))) {
-                            if (Character.getNumericValue(stringFromUser.charAt(i)) < 5 && Character.getNumericValue(stringFromUser.charAt(i)) > 0) {
+                            if (Character.getNumericValue(stringFromUser.charAt(i)) >= minColours && Character.getNumericValue(stringFromUser.charAt(i)) <= maxColours) {
                                 responseIsGood = true;
                             } else {
                                 responseIsGood = false;
-                                System.out.println("le code ne peut contenir que les chiffres compris entre 1 et 4");
+                                System.out.println("le code ne peut contenir que les chiffres compris entre "+minColours+" et "+maxColours);
                                 break;
                             }
                         } else {
                             responseIsGood = false;
-                            System.out.println("le code ne peut contenir que les chiffres compris 1,2,3 ou 4");
+                            System.out.println("le code ne peut contenir que les chiffres compris entre "+minColours+" et "+maxColours);
                             break;
                         }
                     }
                 } else {
                     responseIsGood = false;
-                    System.out.println("Veuillez saisir une combinaison de " + codeSize + " chiffres compris entre 1 et 4");
+                    System.out.println("Veuillez saisir une combinaison de " + codeSize + " chiffres compris entre "+minColours+" et "+maxColours);
                 }
             } catch (InputMismatchException e) {
                 responseIsGood = false;
-                System.out.println("Veuillez saisir " + codeSize + " chiffres compris entre 1 et 4");
+                System.out.println("Veuillez saisir " + codeSize + " chiffres compris entre "+minColours+" et "+maxColours);
                 sc.next();
             }
         } while (!responseIsGood);
@@ -200,9 +218,9 @@ public class Utilities {
 
     public static void askGoodColours(){
         System.out.println("Combien il y a-t-il de couleurs bien placées?");
-        getTheNumber(0,4);
+        getTheNumber(0,codeSize);
         System.out.println("Combien il y a-t-il de couleurs mal placées?");
-        getTheNumber(0,4);
+        getTheNumber(0,codeSize);
     }
 
     public static void displayNbTour (int nbTours){
