@@ -6,16 +6,18 @@ public class MasterMindChallenger {
         String codeFromUser="";
         String codeFromIA = Utilities.getTheRandomColours();
         int nbTry=0;
+        boolean playAgain=true;
         boolean success=false;
-        while (!success ||nbTry < Utilities.allowedTry) {
-
-            if (nbTry < Utilities.allowedTry) {
+        while (!success) {
+            playAgain=Utilities.allowedToPlay(nbTry,codeFromIA);
+            if (!playAgain)break;
+            /*if (nbTry < Utilities.allowedTry) {
                 System.out.println("ATTENTION! il ne reste plus que: " + (Utilities.allowedTry - nbTry) + " essais");
             } else{
                 System.out.println("DOMMAGE! vous n'avez pas trouvé la solution");
                 System.out.println("La solution était: "+codeFromIA);
                 break;
-            }
+            }*/
 
             System.out.println("Que pensez-vous être la combianaison de l'ordinateur?");
             codeFromUser = Utilities.getTheColours();

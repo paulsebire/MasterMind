@@ -245,4 +245,19 @@ public class Utilities {
         }
         return equals.toString();
     }
+
+    public static boolean allowedToPlay (int nbTry, String codeFromIA){
+
+        if (nbTry < Utilities.allowedTry) {
+            displayNbTour(nbTry+1);
+            System.out.println("ATTENTION! il ne reste plus que: " + (Utilities.allowedTry - nbTry) + " essais");
+            return true;
+        } else{
+            System.out.println("\n"+"DOMMAGE! vous n'avez pas trouvé la solution");
+            System.out.println("La solution était: "+codeFromIA);
+            return false;
+        }
+
+    }
+
 }

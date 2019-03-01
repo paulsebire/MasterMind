@@ -8,24 +8,27 @@ public class RechercheChallenger {
     private static int nbTry;
 
     public static void rechercheChallenger(){
+        boolean playAgain=true;
         result="";
         nbTry=0;
         randomCode = String.valueOf((int) (Math.random() * (double)Math.pow(10,Utilities.codeSize)));
         randomCode=Utilities.codeInShape(randomCode);
-        while (!result.equals("====")) {
-            if (nbTry < Utilities.allowedTry) {
+        while (!result.equals(Utilities.solution)) {
+            playAgain=Utilities.allowedToPlay(nbTry,randomCode);
+            if (!playAgain)break;
+            /*if (nbTry < Utilities.allowedTry) {
                 System.out.println("ATTENTION! il ne reste plus que: " + (Utilities.allowedTry - nbTry) + " essais");
             } else{
                 System.out.println("DOMMAGE! vous n'avez pas trouvé la solution");
                 System.out.println("La solution était: "+randomCode);
                 break;
-            }
+            }*/
             System.out.println("Que pensez-vous être le code de l'ordinateur?");
             codeFromUser = Utilities.getTheString();
             result = breakTheCode(codeFromUser, randomCode);
             System.out.println("Proposition: " + codeFromUser + " ==> Réponse: " + result);
             nbTry++;
-            if (result.equals("====")) {
+            if (result.equals(Utilities.solution)) {
                 System.out.println("FELICITATTONS!!! Vous avez trouvé le code secret!");
                 break;
             }

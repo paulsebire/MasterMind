@@ -61,7 +61,7 @@ public class Main {
                     }
                     break;
             }
-            System.out.println("Voulez-vous faire une autre partie? 1-OUI, 2-NON");
+            System.out.println("\n"+"Voulez-vous faire une autre partie? 1-OUI, 2-NON");
             gameChoice=Utilities.getTheNumber(1,2);
             if (gameChoice==1)playAgain=true;
             else playAgain=false;
