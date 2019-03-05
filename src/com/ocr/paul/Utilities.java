@@ -7,20 +7,20 @@ public class Utilities {
 
     private int codeSize;
     private int allowedTry;
+    private int numberOfColours;
 
-    int numberOfColours=5;
     Scanner sc = new Scanner(System.in);
     int number = 0;
-   // String solution = stringOfEquals(getCodeSize());
     String solution="";
     int minColours;
     int maxColours;
 
 
 
-    public Utilities(int codeSize, int allowedTry) {
+    public Utilities(int codeSize, int allowedTry, int numberOfColours) {
         this.codeSize=codeSize;
         this.allowedTry=allowedTry;
+        this.numberOfColours=numberOfColours;
         this.solution=stringOfEquals(codeSize);
     }
 
@@ -28,16 +28,16 @@ public class Utilities {
         return codeSize;
     }
 
-    public void setCodeSize(int codeSize) {
-        this.codeSize = codeSize;
-    }
-
     public int getAllowedTry() {
         return allowedTry;
     }
 
-    public void setAllowedTry(int allowedTry) {
-        this.allowedTry = allowedTry;
+    public int getNumberOfColours() {
+        return numberOfColours;
+    }
+
+    public void setNumberOfColours(int numberOfColours) {
+        this.numberOfColours = numberOfColours;
     }
 
     public int getTheNumber(int min, int max) {
@@ -168,12 +168,12 @@ public class Utilities {
     }
 
     public void fixTheColoursBounds (){
-        if (numberOfColours<4) numberOfColours=4;
-        else if (numberOfColours>10) numberOfColours=10;
+        if (getNumberOfColours()<4) setNumberOfColours(4);
+        else if (getNumberOfColours()>10) setNumberOfColours(10);
 
-        if (numberOfColours!=10){
+        if (getNumberOfColours()!=10){
             minColours =1;
-            maxColours= numberOfColours;
+            maxColours= getNumberOfColours();
         } else{
             minColours=0;
             maxColours=9;

@@ -2,9 +2,9 @@ import com.ocr.paul.*;
 
 public class Main {
 
-    private static Utilities utilities = new Utilities(4,5);
+    private static Utilities utilities = new Utilities(4,5,4);
     private static ResearchGame researchGame=new ResearchGame(utilities);
-    // private static MasterMind masterMind= new MasterMind();
+    private static MasterMind masterMind= new MasterMind(utilities);
 
     public static void main(String[] args) {
 
@@ -37,30 +37,30 @@ public class Main {
                             break;
                     }
                     break;
-               /* case 2:
+                case 2:
                     System.out.println("Vous avez choisi le Jeu de MasterMind");
                     System.out.println("Veuillez choisir le mode de jeu: 1-Challenger, 2-Défenseur, 3-Duel VS IA");
-                    gameChoice=Utilities.getTheNumber(1,3);
+                    gameChoice=utilities.getTheNumber(1,3);
                    switch (gameChoice){
                         case 1:
                             System.out.println("Jeu du MasterMind - mode Challenger");
-                            masterMindChallenger.masterMindChallengerMode();
+                            masterMind.masterMindChallengerMode();
                             break;
                         case 2:
                             System.out.println("Jeu du MasterMind - mode Défenseur");
-                            masterMindDefender.masterMindDefenderMode();
+                            masterMind.masterMindDefenderMode();
                             break;
                         case 3:
                             System.out.println("Jeu du MasterMind - mode Duel VS IA");
-                            masterMindDuel.masterMindDuel();
+                            masterMind.masterMindDuel();
                             break;
                     }
-                    break;*/
+                    break;
             }
             System.out.println("\n"+"Voulez-vous faire une autre partie? 1-OUI, 2-NON");
             gameChoice=utilities.getTheNumber(1,2);
-            if (gameChoice==1)playAgain=true;
-            else playAgain=false;
+            if (gameChoice==2)return;
+
         }
 
     }
