@@ -1,8 +1,8 @@
-package com.ocr.paul;
+/*package com.ocr.paul;
 
 public class MasterMindChallenger {
 
-    public static void masterMindChallengerMode(){
+    public void masterMindChallengerMode(){
         String codeFromUser="";
         String codeFromIA = Utilities.getTheRandomColours();
         int nbTry=0;
@@ -21,21 +21,19 @@ public class MasterMindChallenger {
         return;
     }
 
-    public static boolean mastermindChallenger (String codeFromIA, String codeFromUser){
+    public boolean mastermindChallenger (String codeFromIA, String codeFromUser){
         boolean success=false;
         boolean []validation= new boolean[codeFromIA.length()];
         int nbPresence=0;
-        int bonnePosition=0;
-
+        int goodPosition=0;
         for (int i=0;i<codeFromIA.length();i++){
             if (Utilities.compareChar(codeFromUser.charAt(i),codeFromIA.charAt(i))==0){
                 validation[i]=true;
-                bonnePosition++;
+                goodPosition++;
             } else{
                 validation[i]=false;
             }
         }
-
         for (int i=0;i<codeFromIA.length();i++){
             if (Utilities.compareChar(codeFromUser.charAt(i),codeFromIA.charAt(i))!=0){
                 int j=0;
@@ -50,12 +48,12 @@ public class MasterMindChallenger {
                 }
             }
         }
-        if (bonnePosition!=4){
+        if (goodPosition!=4){
             System.out.println("il y a "+ nbPresence+ " de couleurs mal placées");
-            System.out.println("il y a "+ bonnePosition +" de couleurs bien placées");
+            System.out.println("il y a "+ goodPosition +" de couleurs bien placées");
             success=false;
         } else success=true;
         return success;
     }
 
-}
+}*/

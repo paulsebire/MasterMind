@@ -1,4 +1,4 @@
-package com.ocr.paul;
+/*package com.ocr.paul;
 
 public class MasterMindDuel {
 
@@ -36,4 +36,4 @@ public class MasterMindDuel {
 
 
 
-}
+}*/

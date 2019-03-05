@@ -2,13 +2,9 @@ import com.ocr.paul.*;
 
 public class Main {
 
-    private static Utilities utilities = new Utilities();
-    private static RechercheChallenger rechercheChallenger = new RechercheChallenger();
-    private static RechercheDefender rechercheDefender = new RechercheDefender();
-    private static RechercheDuel rechercheDuel = new RechercheDuel();
-    private static MasterMindChallenger masterMindChallenger= new MasterMindChallenger();
-    private static MasterMindDefender masterMindDefender = new MasterMindDefender();
-    private static MasterMindDuel masterMindDuel = new MasterMindDuel();
+    private static Utilities utilities = new Utilities(4,5);
+    private static ResearchGame researchGame=new ResearchGame(utilities);
+    // private static MasterMind masterMind= new MasterMind();
 
     public static void main(String[] args) {
 
@@ -25,23 +21,23 @@ public class Main {
                 case 1:
                     System.out.println("Vous avez choisi le Jeu de Recherche");
                     System.out.println("Veuillez choisir le mode de jeu: 1-Challenger, 2-Défenseur, 3-Duel VS IA");
-                    gameChoice=Utilities.getTheNumber(1,3);
+                    gameChoice=utilities.getTheNumber(1,3);
                     switch (gameChoice){
                         case 1:
                             System.out.println("Jeu de recherche - mode Challenger");
-                            rechercheChallenger.rechercheChallenger();
+                            researchGame.rechercheChallenger();
                             break;
                         case 2:
                             System.out.println("Jeu de recherche - mode Défenseur");
-                            rechercheDefender.rechercheDefender();
+                            researchGame.rechercheDefender();
                             break;
                         case 3:
                             System.out.println("Jeu de recherche - mode Duel VS IA");
-                            rechercheDuel.rechercheDuel();
+                            researchGame.rechercheDuel();
                             break;
                     }
                     break;
-                case 2:
+               /* case 2:
                     System.out.println("Vous avez choisi le Jeu de MasterMind");
                     System.out.println("Veuillez choisir le mode de jeu: 1-Challenger, 2-Défenseur, 3-Duel VS IA");
                     gameChoice=Utilities.getTheNumber(1,3);
@@ -59,10 +55,10 @@ public class Main {
                             masterMindDuel.masterMindDuel();
                             break;
                     }
-                    break;
+                    break;*/
             }
             System.out.println("\n"+"Voulez-vous faire une autre partie? 1-OUI, 2-NON");
-            gameChoice=Utilities.getTheNumber(1,2);
+            gameChoice=utilities.getTheNumber(1,2);
             if (gameChoice==1)playAgain=true;
             else playAgain=false;
         }

@@ -4,16 +4,43 @@ import java.util.Scanner;
 import static java.lang.Character.isDigit;
 
 public class Utilities {
-    static int codeSize = 4;
-    static int numberOfColours=5;
-    static int allowedTry = 5;
-    static Scanner sc = new Scanner(System.in);
-    static int number = 0;
-    static String solution = stringOfEquals(codeSize);
-    static int minColours;
-    static int maxColours;
 
-    public static int getTheNumber(int min, int max) {
+    private int codeSize;
+    private int allowedTry;
+
+    int numberOfColours=5;
+    Scanner sc = new Scanner(System.in);
+    int number = 0;
+   // String solution = stringOfEquals(getCodeSize());
+    String solution="";
+    int minColours;
+    int maxColours;
+
+
+
+    public Utilities(int codeSize, int allowedTry) {
+        this.codeSize=codeSize;
+        this.allowedTry=allowedTry;
+        this.solution=stringOfEquals(codeSize);
+    }
+
+    public int getCodeSize() {
+        return codeSize;
+    }
+
+    public void setCodeSize(int codeSize) {
+        this.codeSize = codeSize;
+    }
+
+    public int getAllowedTry() {
+        return allowedTry;
+    }
+
+    public void setAllowedTry(int allowedTry) {
+        this.allowedTry = allowedTry;
+    }
+
+    public int getTheNumber(int min, int max) {
 
         boolean responseIsGood;
         do {
@@ -34,14 +61,14 @@ public class Utilities {
         return number;
     }
 
-    public static String getTheString() {
-        System.out.println("veuillez entrer un code compris entre " + codeBound(codeSize, 0) + " et " + codeBound(codeSize, 9));
+    public  String getTheString() {
+        System.out.println("veuillez entrer un code compris entre " + codeBound(0) + " et " + codeBound(9));
         String stringFromUser = "";
         boolean responseIsGood = false;
         do {
             try {
                 stringFromUser = sc.nextLine();
-                if (stringFromUser.length() == codeSize) {
+                if (stringFromUser.length() == getCodeSize()) {
                     for (int i = 0; i < stringFromUser.length(); i++) {
                         if (isDigit(stringFromUser.charAt(i))) {
                             responseIsGood = true;
@@ -53,21 +80,21 @@ public class Utilities {
                     }
                 } else {
                     responseIsGood = false;
-                    System.out.println("Veuillez saisir " + codeSize + " chiffres");
+                    System.out.println("Veuillez saisir " + getCodeSize() + " chiffres");
                 }
             } catch (InputMismatchException e) {
                 sc.next();
                 responseIsGood = false;
-                System.out.println("Veuillez saisir un code à " + codeSize + " chiffres");
+                System.out.println("Veuillez saisir un code à " + getCodeSize() + " chiffres");
             }
         } while (!responseIsGood);
         return stringFromUser;
     }
 
-    private static String codeBound(int codeSize, int minOrMax) {
+    public String codeBound(int minOrMax) {
         String bound = "";
         StringBuilder boundBuilder = new StringBuilder("");
-        for (int j = 0; j < codeSize; j++) {
+        for (int j = 0; j < getCodeSize(); j++) {
             boundBuilder.append(minOrMax);
         }
 
@@ -77,10 +104,10 @@ public class Utilities {
         return bound;
     }
 
-    public static String codeInShape(String proposition) {
+    public String codeInShape(String proposition) {
         StringBuilder codeStringBuilder = new StringBuilder();
-        if (proposition.length() != codeSize) {
-            for (int k = 0; k < codeSize - proposition.length(); k++) {
+        if (proposition.length() != getCodeSize()) {
+            for (int k = 0; k < getCodeSize() - proposition.length(); k++) {
                 codeStringBuilder.append("0");
             }
             codeStringBuilder.append(proposition);
@@ -90,7 +117,7 @@ public class Utilities {
         return proposition;
     }
 
-    public static String getTheRechercheResponse() {
+    public  String getTheRechercheResponse() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Veuillez répondre à la proposition de l'IA (avec +,-,=)");
         String stringFromUser = "";
@@ -98,7 +125,7 @@ public class Utilities {
         do {
             try {
                 stringFromUser = sc.nextLine();
-                if (stringFromUser.length() == codeSize) {
+                if (stringFromUser.length() == getCodeSize()) {
                     for (int i = 0; i < stringFromUser.length(); i++) {
                         if (stringFromUser.charAt(i) == '+' || stringFromUser.charAt(i) == '-' || stringFromUser.charAt(i) == '=') {
                             responseIsGood = true;
@@ -111,18 +138,18 @@ public class Utilities {
 
                 } else {
                     responseIsGood = false;
-                    System.out.println("Veuillez saisir " + codeSize + " symboles (+,-,=)");
+                    System.out.println("Veuillez saisir " + getCodeSize() + " symboles (+,-,=)");
                 }
             } catch (InputMismatchException e) {
                 sc.next();
                 responseIsGood = false;
-                System.out.println("Veuillez saisir " + codeSize + " symboles (+,-,=)");
+                System.out.println("Veuillez saisir " + getCodeSize() + " symboles (+,-,=)");
             }
         } while (!responseIsGood);
         return stringFromUser;
     }
 
-    public static boolean getTheResult(String responseFromUser, String result, String codeFromIA) {
+    public  boolean getTheResult(String responseFromUser, String result, String codeFromIA) {
 
         if (responseFromUser.equals(solution) && result.equals(solution)) {
             System.out.println("Il y a EGALITE");
@@ -153,7 +180,7 @@ public class Utilities {
         }
     }
 
-    public static String getTheRandomColours() {
+    public  String getTheRandomColours() {
         String randomColours = "";
         StringBuilder tempColours = new StringBuilder();
         tempColours.setLength(0);
@@ -166,7 +193,7 @@ public class Utilities {
         return randomColours;
     }
 
-    public static String getTheColours() {
+    public  String getTheColours() {
         String stringFromUser = "";
         boolean responseIsGood = false;
         do {
@@ -201,7 +228,7 @@ public class Utilities {
         return stringFromUser;
     }
 
-    public static boolean getTheMastermindResultDuel (String codeFromUser, String proposition,String codeFromIA, boolean successIA){
+    public  boolean getTheMastermindResultDuel (String codeFromUser, String proposition,String codeFromIA, boolean successIA){
         if (proposition.equals(codeFromUser)&& successIA){
             System.out.println("Il y a EGALITE");
             return true;
@@ -217,27 +244,27 @@ public class Utilities {
         }return false;
     }
 
-    public static void askGoodColours(){
+    public  void askGoodColours(){
         System.out.println("Combien il y a-t-il de couleurs bien placées?");
         getTheNumber(0,codeSize);
         System.out.println("Combien il y a-t-il de couleurs mal placées?");
         getTheNumber(0,codeSize);
     }
 
-    public static void displayNbTour (int nbTours){
+    public  void displayNbTour (int nbTours){
         System.out.println("-------------------------------------------------------------");
         System.out.println("TOUR NUMERO: " + nbTours);
         System.out.println("-------------------------------------------------------------");
 
     }
 
-    public static int compareChar (char a, char b){
+    public  int compareChar (char a, char b){
         if (Character.getNumericValue(a)==Character.getNumericValue(b))return 0;
         else if (Character.getNumericValue(a)>Character.getNumericValue(b)) return 1;
             else return -1;
     }
 
-    public static String stringOfEquals (int codeSize){
+    public  String stringOfEquals (int codeSize){
         StringBuilder equals = new StringBuilder();
 
         for (int i=0;i<codeSize;i++){
@@ -246,11 +273,11 @@ public class Utilities {
         return equals.toString();
     }
 
-    public static boolean allowedToPlay (int nbTry, String codeFromIA){
+    public  boolean allowedToPlay (int nbTry, String codeFromIA){
 
-        if (nbTry < Utilities.allowedTry) {
+        if (nbTry < getAllowedTry()) {
             displayNbTour(nbTry+1);
-            System.out.println("ATTENTION! il ne reste plus que: " + (Utilities.allowedTry - nbTry) + " essais");
+            System.out.println("ATTENTION! il ne reste plus que: " + (getAllowedTry() - nbTry) + " essais");
             return true;
         } else{
             System.out.println("\n"+"DOMMAGE! vous n'avez pas trouvé la solution");

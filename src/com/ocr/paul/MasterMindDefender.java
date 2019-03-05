@@ -1,9 +1,9 @@
-package com.ocr.paul;
+/*package com.ocr.paul;
 
 public class MasterMindDefender {
     static StringBuilder resultFromIA= new StringBuilder();
 
-    public static void masterMindDefenderMode(){
+    public void masterMindDefenderMode(){
         int nbTry=0;
         String codeFromUser=Utilities.getTheColours();
         String codeFromIA=Utilities.getTheRandomColours();
@@ -27,7 +27,7 @@ public class MasterMindDefender {
         return;
     }
 
-    public static String mastermindDefender (String codeFromUser, String codeFromIA){
+    public String mastermindDefender (String codeFromUser, String codeFromIA){
         resultFromIA.setLength(0);
         for (int i=0;i<codeFromUser.length();i++){
             if (Utilities.compareChar(codeFromIA.charAt(i),codeFromUser.charAt(i))==0){
@@ -37,4 +37,4 @@ public class MasterMindDefender {
         codeFromIA=resultFromIA.toString();
         return codeFromIA;
     }
-}
+}*/
