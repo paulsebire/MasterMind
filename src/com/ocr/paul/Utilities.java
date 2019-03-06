@@ -9,6 +9,7 @@ public class Utilities {
     private int allowedTry;
     private int numberOfColours;
 
+
     Scanner sc = new Scanner(System.in);
     int number = 0;
     String solution="";
@@ -22,7 +23,10 @@ public class Utilities {
         this.allowedTry=allowedTry;
         this.numberOfColours=numberOfColours;
         this.solution=stringOfEquals(codeSize);
+
+
     }
+
 
     public int getCodeSize() {
         return codeSize;
@@ -152,16 +156,16 @@ public class Utilities {
     public  boolean getTheResult(String responseFromUser, String result, String codeFromIA) {
 
         if (responseFromUser.equals(solution) && result.equals(solution)) {
-            System.out.println("Il y a EGALITE");
+            System.out.println("\n"+"Il y a EGALITE");
             return true;
         }
         if (responseFromUser.equals(solution)) {
-            System.out.println("L'IA a trouvé votre code, vous avez PERDU");
+            System.out.println("\n"+"L'IA a trouvé votre code, vous avez PERDU");
             System.out.println("La solution du code de la machine était: " + codeFromIA);
             return true;
         }
         if (result.equals(solution)) {
-            System.out.println("Vous avez trouvé le code de l'IA, vous avez GAGNE");
+            System.out.println("\n"+"Vous avez trouvé le code de l'IA, vous avez GAGNE");
             return true;
         }
         return false;
@@ -230,16 +234,16 @@ public class Utilities {
 
     public  boolean getTheMastermindResultDuel (String codeFromUser, String proposition,String codeFromIA, boolean successIA){
         if (proposition.equals(codeFromUser)&& successIA){
-            System.out.println("Il y a EGALITE");
+            System.out.println("\n"+"Il y a EGALITE");
             return true;
         }
         if (proposition.equals(codeFromUser)){
-            System.out.println("L'IA a trouvé votre code, vous avez PERDU");
+            System.out.println("\n"+"L'IA a trouvé votre code, vous avez PERDU");
             System.out.println("La solution du code de la machnie était: "+ codeFromIA);
             return true;
         }
         if (successIA){
-            System.out.println("Vous avez trouvé le code de l'IA, vous avez GAGNE");
+            System.out.println("\n"+"Vous avez trouvé le code de l'IA, vous avez GAGNE");
             return true;
         }return false;
     }
@@ -287,4 +291,11 @@ public class Utilities {
 
     }
 
+    public boolean wantToPlay(){
+        int choice=0;
+        System.out.println("\n"+"Voulez-vous faire une autre partie? 1-OUI, 2-NON");
+        choice=getTheNumber(1,2);
+        if (choice==1)return true;
+        else return false;
+    }
 }

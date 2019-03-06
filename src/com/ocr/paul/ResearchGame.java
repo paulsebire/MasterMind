@@ -1,13 +1,12 @@
 package com.ocr.paul;
 
-import com.sun.tools.javac.Main;
-
 import java.util.HashMap;
-import java.util.Vector;
+
 
 public class ResearchGame {
 
     private Utilities utilities;
+    private boolean devMode;
 
     private  String randomCode="";
     private  String result="";
@@ -19,22 +18,26 @@ public class ResearchGame {
 
 
 
-    public ResearchGame(Utilities utilities) {
+    public ResearchGame(Utilities utilities, boolean devMode) {
         this.utilities=utilities;
+        this.devMode= devMode;
     }
 
     public Utilities getUtilities() {
         return utilities;
     }
 
+    public boolean isDevMode() {
+        return devMode;
+    }
 
     public void rechercheChallenger(){
-        System.out.println("solution:"+getUtilities().solution);
         boolean playAgain=true;
         result="";
         nbTry=0;
         randomCode = String.valueOf((int) (Math.random() * (double)Math.pow(10,getUtilities().getCodeSize())));
         randomCode=getUtilities().codeInShape(randomCode);
+        if (isDevMode()) System.out.println("la combinaison de l'Ia est :"+randomCode);
         while (!result.equals(getUtilities().solution)) {
             playAgain=getUtilities().allowedToPlay(nbTry,randomCode);
             if (!playAgain)break;
@@ -69,6 +72,7 @@ public class ResearchGame {
         int count = 0;
         String codeFromUser = utilities.getTheString();
         String proposition = String.valueOf((int) (Math.random() * Math.pow(10, getUtilities().getCodeSize())));
+        if (isDevMode()) System.out.println("la proposition de l'Ia est :"+proposition);
         System.out.println("Votre code secret est: " + codeFromUser);
         proposition = utilities.codeInShape(proposition);
         utilities.displayNbTour(nbTry+1);
@@ -111,22 +115,31 @@ public class ResearchGame {
         codeAdapt.setLength(0);
 
         codeHistory.put(count,proposition);
+        if (isDevMode()) System.out.println("l'historique des combinaisons de l'IA est :"+codeHistory.toString());
         for (int i = 0; i < responseFromUser.length(); i++) {
             if (responseFromUser.charAt(i) == '+') {
                 number = (Character.getNumericValue(proposition.charAt(i)) + 9) / 2;
-                if (count > 2 ){
+                if (count >= 2 ){
                     if (valueOFCharInHM(count-1,i) > valueOFCharInHM(count,i)) {
                         number =(valueOFCharInHM(count-1,i)+ valueOFCharInHM(count,i)) / 2;
-                    }else number =(valueOFCharInHM(count-2,i) + valueOFCharInHM(count,i)) / 2;
+                    }else{ if (valueOFCharInHM(count-2,i)>valueOFCharInHM(count-1,i))
+                            number =(valueOFCharInHM(count-2,i) + valueOFCharInHM(count-1,i)) / 2;
+                            else number = (Character.getNumericValue(proposition.charAt(i)) + 9) / 2;
+                    }
                 }
                 if (count > 1 && valueOFCharInHM(count,i) == 8) number = 9;
                 codeAdapt.append(number);
             } else if (responseFromUser.charAt(i) == '-') {
                 number = (Character.getNumericValue(proposition.charAt(i))) / 2;
-                if (count > 2) {
+                if (count >= 2) {
                     if (valueOFCharInHM(count-1,i) < valueOFCharInHM(count,i)) {
                         number = (valueOFCharInHM(count-1,i) +valueOFCharInHM(count,i)) / 2;
-                    } else number =(valueOFCharInHM(count-2,i) + valueOFCharInHM(count-1,i)) / 2;
+                    } else{
+                            if (valueOFCharInHM(count-2,i)<valueOFCharInHM(count-1,i)){
+                            number =(valueOFCharInHM(count-2,i) + valueOFCharInHM(count-1,i)) / 2;
+                            }else number = (Character.getNumericValue(proposition.charAt(i))) / 2;
+
+                    }
                 }
                 if (count > 1 &&valueOFCharInHM(count,i) == 1) number = 0;
                 codeAdapt.append(number);
@@ -149,6 +162,7 @@ public class ResearchGame {
 
 
     public void rechercheDuel(){
+        codeHistory.clear();
         boolean victory=false;
         int nbTours=1;
         System.out.println("--------------------------------------------------------------");
@@ -156,9 +170,12 @@ public class ResearchGame {
         String codeFromUser = utilities.getTheString();
         System.out.println("Votre code secret est: " + codeFromUser);
         String codeFromIA = String.valueOf((int) (Math.random() * (double)Math.pow(10,getUtilities().getCodeSize())));
+
         String proposition=String.valueOf((int) (Math.random() * (double)Math.pow(10,getUtilities().getCodeSize())));
         codeFromIA=utilities.codeInShape(codeFromIA);
+        if (isDevMode()) System.out.println("la combinaison de l'Ia est :"+codeFromIA);
         proposition=utilities.codeInShape(proposition);
+        if (isDevMode()) System.out.println("la proposition de l'Ia est :"+proposition);
         System.out.println("L'IA a choisi son code secret");
         System.out.println("--------------------------------------------------------------");
         System.out.println("                       LE DUEL COMMENCE");

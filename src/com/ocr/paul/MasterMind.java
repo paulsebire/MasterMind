@@ -3,10 +3,17 @@ package com.ocr.paul;
 public class MasterMind {
 
     private Utilities utilities;
+    private boolean devMode;
     private StringBuilder resultFromIA= new StringBuilder();
-    public MasterMind(Utilities utilities) {
-        this.utilities=utilities;
 
+    public MasterMind(Utilities utilities, boolean devMode) {
+        this.utilities = utilities;
+        this.devMode = devMode;
+
+    }
+
+    public boolean isDevMode() {
+        return devMode;
     }
 
     public Utilities getUtilities() {
@@ -18,6 +25,7 @@ public class MasterMind {
     public void masterMindChallengerMode(){
         String codeFromUser="";
         String codeFromIA = getUtilities().getTheRandomColours();
+        if (isDevMode()) System.out.println("la combinaison de l'Ia est :"+codeFromIA);
         int nbTry=0;
         boolean playAgain=true;
         boolean success=false;
@@ -104,6 +112,7 @@ public class MasterMind {
             }else resultFromIA.append( getUtilities().minColours + (int)(Math.random()*getUtilities().maxColours));
         }
         codeFromIA=resultFromIA.toString();
+        if (isDevMode()) System.out.println("la combinaison de l'Ia est :"+codeFromIA);
         return codeFromIA;
     }
 
@@ -115,8 +124,10 @@ public class MasterMind {
         System.out.println("--------------------------------------------------------------");
         System.out.println("Veuillez saisir votre code secret");
         String codeFromUser = getUtilities().getTheColours();
+        if (isDevMode()) System.out.println("la combinaison de l'Ia est :"+codeFromUser);
         System.out.println("Votre code secret est: " + codeFromUser);
         String codeFromIA=getUtilities().getTheRandomColours();
+        if (isDevMode()) System.out.println("la combinaison de l'Ia est :"+codeFromIA);
         System.out.println("L'IA a choisi son code secret");
         System.out.println("--------------------------------------------------------------");
         System.out.println("                       LE DUEL COMMENCE");
