@@ -6,22 +6,36 @@ public class MasterMind {
     private boolean devMode;
     private StringBuilder resultFromIA= new StringBuilder();
 
+    /**
+     * Constructor of Mastermind's class
+     * @param utilities is an instance of Utilities'class
+     * @param devMode will be use in order to allow display
+     */
     public MasterMind(Utilities utilities, boolean devMode) {
         this.utilities = utilities;
         this.devMode = devMode;
 
     }
 
+    /**
+     * getter of boolean devMode, will be use in order to allow display
+     * @return boolean
+     */
     public boolean isDevMode() {
         return devMode;
     }
 
+    /**
+     * allow the code to use methods in Utilities
+     * @return an instance of Utilities
+     */
     public Utilities getUtilities() {
         return utilities;
     }
 
-
-
+    /**
+     * Manage the mastermind mode Challenger
+     */
     public void masterMindChallengerMode(){
         String codeFromUser="";
         String codeFromIA = getUtilities().getTheRandomColours();
@@ -42,6 +56,12 @@ public class MasterMind {
         return;
     }
 
+    /**
+     * this method compare the strings in parameter
+     * @param codeFromIA
+     * @param codeFromUser
+     * @return true if the two strings are the same
+     */
     public boolean mastermindChallenger (String codeFromIA, String codeFromUser){
         boolean success=false;
         boolean []validation= new boolean[codeFromIA.length()];
@@ -77,9 +97,9 @@ public class MasterMind {
         return success;
     }
 
-
-
-
+    /**
+     * Manage the mastermind mode Defender
+     */
     public void masterMindDefenderMode(){
         int nbTry=0;
         String codeFromUser=getUtilities().getTheColours();
@@ -104,6 +124,12 @@ public class MasterMind {
         return;
     }
 
+    /**
+     * the method compare the two strings in parameter, if unmatching char it is replaced by a random number
+     * @param codeFromUser
+     * @param codeFromIA
+     * @return codeFromIA adapted to the user response
+     */
     public String mastermindDefender (String codeFromUser, String codeFromIA){
         resultFromIA.setLength(0);
         for (int i=0;i<codeFromUser.length();i++){
@@ -116,6 +142,10 @@ public class MasterMind {
         return codeFromIA;
     }
 
+    /**
+     * Manage the mastermind mode Duel
+     * call alternatively challenger and defender mode
+     */
     public  void masterMindDuel(){
         String codeFromUserFinding="";
         boolean victory=false;

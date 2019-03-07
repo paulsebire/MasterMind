@@ -7,7 +7,13 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class Main {
-
+    /**
+     *
+     * @param filename = path to the config file
+     * @return an instance of Properties
+     * @throws IOException
+     * @throws FileNotFoundException
+     */
     public static Properties load(String filename) throws IOException, FileNotFoundException{
         Properties properties = new Properties();
         FileInputStream input = new FileInputStream(filename);
@@ -27,12 +33,12 @@ public class Main {
         int numberOfColours=0;
         boolean devMode=false;
 
+        /**
+         * assign values of the config files to local variables
+         */
+
         try{
-            // chargement des propriétés
             Properties prop = load("src\\com\\ocr\\paul\\config.properties");
-            // Affichage des propriétés
-            // Récupère la propriété ma.cle
-            // Si la propriété n'existe pas, retourne la valeur par défaut "vide"
             codeSize = Integer.parseInt(prop.getProperty("codeSize", "4"));
             allowedTry = Integer.parseInt(prop.getProperty("allowedTry", "5"));
             numberOfColours = Integer.parseInt(prop.getProperty("numberOfColours", "4"));
@@ -128,7 +134,6 @@ public class Main {
             System.out.println("\n"+"Voulez-vous jouer à un autre jeu? 1-OUI, 2-NON");
             gameChoice=utilities.getTheNumber(1,2);
             if (gameChoice==2)playAgain=false;
-
         }
         System.out.println("Merci d'avoir joué! à bientôt");
     }

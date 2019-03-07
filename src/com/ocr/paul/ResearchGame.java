@@ -16,21 +16,35 @@ public class ResearchGame {
     private  StringBuilder codeAdapt = new StringBuilder("");
 
 
-
+    /**
+     * Constructor of Mastermind's class
+     * @param utilities is an instance of Utilities'class
+     * @param devMode will be use in order to allow display
+     */
 
     public ResearchGame(Utilities utilities, boolean devMode) {
         this.utilities=utilities;
         this.devMode= devMode;
     }
 
+    /**
+     * allow the code to use methods in Utilities
+     * @return utilities is an instance of Utilities'class
+     */
     public Utilities getUtilities() {
         return utilities;
     }
-
+    /**
+     * getter of boolean devMode, will be use in order to allow display
+     * @return boolean
+     */
     public boolean isDevMode() {
         return devMode;
     }
 
+    /**
+     * Manage the Research game in challenger mode
+     */
     public void rechercheChallenger(){
         boolean playAgain=true;
         result="";
@@ -53,6 +67,12 @@ public class ResearchGame {
         }
     }
 
+    /**
+     * this method compare the two strings in parameter
+     * @param codeFromUser
+     * @param codeForIA
+     * @return a string composed of +,-,=
+     */
     public String breakTheCode(String codeFromUser, String codeForIA) {
         int codeSize=4;
         StringBuilder resultStringBuilder=new StringBuilder("");
@@ -67,6 +87,9 @@ public class ResearchGame {
         return resultStringBuilder.toString();
     }
 
+    /**
+     * Manage the Research game in Defender mode
+     */
     public void rechercheDefender() {
         int nbTry = 0;
         int count = 0;
@@ -108,7 +131,13 @@ public class ResearchGame {
 
     }
 
-
+    /**
+     * this method create a string char by char adapted from previous propositions
+     * @param responseFromUser composed of +,-,=
+     * @param proposition string trying to find the user's code
+     * @param count actualnumber of plays
+     * @return a string adapted from previous propositions
+     */
     public String iABreakYourCode(String responseFromUser, String proposition, int count) {
 
         int number;
@@ -150,17 +179,22 @@ public class ResearchGame {
         }
         proposition = codeAdapt.toString();
         return proposition;
-
-
-
     }
 
+    /**
+     * convert a char from hashmap in integer
+     * @param key
+     * @param i
+     * @return an integer of the char i in the hashmap indice key
+     */
     public int valueOFCharInHM (int key, int i){
             return Character.getNumericValue(codeHistory.get(key).charAt(i));
 
     }
 
-
+    /**
+     * Manage the Research game in duel mode
+     */
     public void rechercheDuel(){
         codeHistory.clear();
         boolean victory=false;
