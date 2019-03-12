@@ -1,8 +1,10 @@
 package com.ocr.paul;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
+//import java.util.logging.Logger;
 import static java.lang.Character.isDigit;
-
+import org.apache.logging.log4j.Logger;
 public class Utilities {
 
     private int codeSize;
@@ -15,19 +17,20 @@ public class Utilities {
     String solution="";
     int minColours;
     int maxColours;
-
+   Logger logger;
 
     /**
      * Constructor of the  CLass Utilities
-     * @param codeSize
-     * @param allowedTry
-     * @param numberOfColours
+     * @param codeSize determine the length of the combination
+     * @param allowedTry determine the number of allowed try
+     * @param numberOfColours determine the number of colours in the mastermind
      */
-    public Utilities(int codeSize, int allowedTry, int numberOfColours) {
+    public Utilities(int codeSize, int allowedTry, int numberOfColours, Logger logger) {
         this.codeSize=codeSize;
         this.allowedTry=allowedTry;
         this.numberOfColours=numberOfColours;
         this.solution=stringOfEquals(codeSize);
+        this.logger=logger;
 
 
     }
@@ -66,11 +69,12 @@ public class Utilities {
         this.numberOfColours = numberOfColours;
     }
 
+
     /**
      * get the user's input, input must be an integer between min and max
      * @param min
      * @param max
-     * @return
+     * @return an input integer between min and max
      */
     public int getTheNumber(int min, int max) {
 
@@ -83,11 +87,13 @@ public class Utilities {
                 } else {
                     responseIsGood = false;
                     System.out.println("Veuillez saisir un nombre compris  entre " + min + " et " + max);
+                    logger.warn("out of bound");
                 }
             } catch (InputMismatchException e) {
                 sc.next();
                 responseIsGood = false;
                 System.out.println("Veuillez saisir un nombre compris  entre " + min + " et " + max);
+                logger.warn("not an Integer");
             }
         } while (!responseIsGood);
         return number;
@@ -393,9 +399,20 @@ public class Utilities {
      */
     public boolean wantToPlay(){
         int choice=0;
-        System.out.println("\n"+"Voulez-vous faire une autre partie? 1-OUI, 2-NON");
-        choice=getTheNumber(1,2);
-        if (choice==1)return true;
-        else return false;
+        System.out.println("\n"+"Que souhaitez vous faire?");
+        System.out.println("1 - faire le même jeu");
+        System.out.println("2 - retour au menu principal");
+        System.out.println("3 - quitter le programme");
+        choice=getTheNumber(1,3);
+
+        switch (choice){
+            case 1: return true;
+            case 2: return false;
+            case 3:
+                logger.info("programme quitté par l'utilisateur");
+                System.exit(0);
+                return false;
+        }
+        return false;
     }
 }
