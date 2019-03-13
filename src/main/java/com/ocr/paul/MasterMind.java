@@ -1,20 +1,21 @@
 package com.ocr.paul;
-
+import org.apache.logging.log4j.Logger;
 public class MasterMind {
 
     private Utilities utilities;
     private boolean devMode;
     private StringBuilder resultFromIA= new StringBuilder();
+    private Logger logger;
 
     /**
      * Constructor of Mastermind's class
      * @param utilities is an instance of Utilities'class
      * @param devMode will be use in order to allow display
      */
-    public MasterMind(Utilities utilities, boolean devMode) {
+    public MasterMind(Utilities utilities, boolean devMode, Logger logger) {
         this.utilities = utilities;
         this.devMode = devMode;
-
+        this.logger=logger;
     }
 
     /**
@@ -40,19 +41,29 @@ public class MasterMind {
         String codeFromUser="";
         String codeFromIA = getUtilities().getTheRandomColours();
         if (isDevMode()) System.out.println("la combinaison de l'Ia est :"+codeFromIA);
+        logger.debug("la combinaison de l'Ia est :"+codeFromIA);
         int nbTry=0;
         boolean playAgain=true;
         boolean success=false;
-        while (!success) {
+        while (!success&&nbTry<getUtilities().getAllowedTry()) {
             playAgain=getUtilities().allowedToPlay(nbTry,codeFromIA);
             if (!playAgain)break;
             System.out.println("Que pensez-vous être la combianaison de l'ordinateur?");
             codeFromUser = getUtilities().getTheColours();
+            logger.debug("l'utilisateur propose la combinaison: "+codeFromUser);
             System.out.println("vous proposez les couleurs suivantes: " + codeFromUser);
+            logger.debug("le porgramme compare la combinaison de l'IA: "+codeFromIA+" avec la combinaison de l'utilisateur: "+codeFromUser);
             success=mastermindChallenger(codeFromIA, codeFromUser);
+
             nbTry ++;
         }
-        if (success)System.out.println("FELICITATIONS, vous avez trouvé le code");
+        if (success){
+            logger.debug("VICTOIRE: le nombre de couleurs bien placées  est égal à la longueur de la combianaison "+getUtilities().getCodeSize());
+            System.out.println("FELICITATIONS, vous avez trouvé le code");
+        }else {
+            System.out.println("\n"+"Vous n'avez pas trouvé le code secret qui était "+codeFromIA+", vous avez PERDU");
+            logger.debug("L'IA a GAGNE");
+        }
         return;
     }
 
@@ -89,11 +100,15 @@ public class MasterMind {
                 }
             }
         }
-        if (goodPosition!=4){
+        if (goodPosition!=getUtilities().getCodeSize()){
             System.out.println("il y a "+ nbPresence+ " de couleurs mal placées");
             System.out.println("il y a "+ goodPosition +" de couleurs bien placées");
+            logger.debug("l'IA a déterminé qu'il y a "+ goodPosition +" de couleurs bien placées et qu'il y a "+nbPresence+ " de couleurs mal placées");
             success=false;
-        } else success=true;
+        } else{
+            success=true;
+        }
+
         return success;
     }
 
@@ -103,23 +118,28 @@ public class MasterMind {
     public void masterMindDefenderMode(){
         int nbTry=0;
         String codeFromUser=getUtilities().getTheColours();
+        logger.debug("La combinaison de secrète de l'utilisateur est: "+codeFromUser);
         String codeFromIA=getUtilities().getTheRandomColours();
-        System.out.println("L'ordinateur propose le code suivant: "+codeFromIA);
-        while (!codeFromIA.equals(codeFromUser)||nbTry < getUtilities().getAllowedTry()) {
-            if (nbTry < getUtilities().getAllowedTry()) {
-                System.out.println("ATTENTION! il ne reste plus que: " + (getUtilities().getAllowedTry() - nbTry) + " essais");
-            } else{
-                System.out.println("FELICITATIONS! l'ordinateur n'a pas réussi à trouver votre code.");
-                break;
-            }
+
+
+         do{
+             codeFromIA=mastermindDefender(codeFromUser,codeFromIA);
+            getUtilities().displayNbTour(nbTry+1);
+            System.out.println("ATTENTION! il ne reste plus que: " + (getUtilities().getAllowedTry() - nbTry) + " essais");
+            System.out.println("L'ordinateur propose le code suivant: "+codeFromIA);
+            logger.debug("L'IA propose la combinaison: "+codeFromIA);
             getUtilities().askGoodColours();
-            codeFromIA=mastermindDefender(codeFromUser,codeFromIA);
             nbTry++;
-            if (nbTry < getUtilities().getAllowedTry())System.out.println("L'ordinateur propose le code suivant: "+codeFromIA);
 
+        }while (!codeFromIA.equals(codeFromUser)&& nbTry < getUtilities().getAllowedTry());
+        if (nbTry >= getUtilities().getAllowedTry()){
+            System.out.println("FELICITATIONS! l'ordinateur n'a pas réussi à trouver votre code.");
+            logger.debug("nombre d'essais possible dépassé");
         }
-
-        if (codeFromIA.equals(codeFromUser)) System.out.println("l'ordinateur à trouvé votre code: "+ codeFromUser);
+        if (codeFromIA.equals(codeFromUser)){
+            System.out.println("l'ordinateur à trouvé votre code: "+ codeFromUser);
+            logger.debug("la proposition de l'IA "+codeFromIA+" correspond à la combinaison de l'utilisateur "+codeFromUser);
+        }
 
         return;
     }
@@ -154,25 +174,28 @@ public class MasterMind {
         System.out.println("--------------------------------------------------------------");
         System.out.println("Veuillez saisir votre code secret");
         String codeFromUser = getUtilities().getTheColours();
-        if (isDevMode()) System.out.println("la combinaison de l'Ia est :"+codeFromUser);
+        logger.debug("le code secret de l'utilisateur est: "+codeFromUser);
+
         System.out.println("Votre code secret est: " + codeFromUser);
         String codeFromIA=getUtilities().getTheRandomColours();
-        if (isDevMode()) System.out.println("la combinaison de l'Ia est :"+codeFromIA);
-        System.out.println("L'IA a choisi son code secret");
-        System.out.println("--------------------------------------------------------------");
-        System.out.println("                       LE DUEL COMMENCE");
+        logger.debug("le code secret de l'Ia est: "+codeFromIA);
+        utilities.letTheDuelBegin(isDevMode(),codeFromIA);
         String proposition = getUtilities().getTheRandomColours();
         while(!victory){
             getUtilities().displayNbTour(nbTours);
-            System.out.println("l'IA propose le code  suivant: " + proposition);
+            System.out.println("l'IA propose le code suivant: " + proposition);
+            logger.debug("l'IA propose le code suivant: " + proposition);
             getUtilities().askGoodColours();
-            System.out.println("que pensez vous être la combinaison de la machine?");
+            System.out.println("\n"+"que pensez vous être la combinaison de la machine?");
             codeFromUserFinding = getUtilities().getTheColours();
             System.out.println("vous proposez les couleurs suivantes: " + codeFromUserFinding);
+            logger.debug("L'utilisateur propose les couleurs suivantes: " + codeFromUserFinding);
             successUser = mastermindChallenger(codeFromIA, codeFromUserFinding);
-            nbTours++;
+            logger.debug("le programme vérifie si la proposition de l'IA "+proposition+" correspond au code secret de l'utilisateur "+codeFromUser);
+            logger.debug("le programme vérifie si la proposition de l'utilisateur "+codeFromUserFinding+" correspond au code secret de l'IA "+codeFromIA);
             victory=getUtilities().getTheMastermindResultDuel(codeFromUser,proposition,codeFromIA,successUser);
             proposition = mastermindDefender(codeFromUser, proposition);
+            nbTours++;
         }
     }
 

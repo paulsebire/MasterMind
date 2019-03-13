@@ -1,6 +1,7 @@
 package com.ocr.paul;
 
 import java.util.HashMap;
+import org.apache.logging.log4j.Logger;
 
 
 public class ResearchGame {
@@ -14,7 +15,7 @@ public class ResearchGame {
     private  int nbTry;
     private HashMap<Integer,String> codeHistory = new HashMap();
     private  StringBuilder codeAdapt = new StringBuilder("");
-
+    private Logger logger;
 
     /**
      * Constructor of Mastermind's class
@@ -22,9 +23,10 @@ public class ResearchGame {
      * @param devMode will be use in order to allow display
      */
 
-    public ResearchGame(Utilities utilities, boolean devMode) {
+    public ResearchGame(Utilities utilities, boolean devMode, Logger logger) {
         this.utilities=utilities;
         this.devMode= devMode;
+        this.logger=logger;
     }
 
     /**
@@ -52,15 +54,20 @@ public class ResearchGame {
         randomCode = String.valueOf((int) (Math.random() * (double)Math.pow(10,getUtilities().getCodeSize())));
         randomCode=getUtilities().codeInShape(randomCode);
         if (isDevMode()) System.out.println("la combinaison de l'Ia est :"+randomCode);
+        logger.debug("la combinaison de l'Ia est :"+randomCode);
         while (!result.equals(getUtilities().solution)) {
             playAgain=getUtilities().allowedToPlay(nbTry,randomCode);
             if (!playAgain)break;
             System.out.println("Que pensez-vous être le code de l'ordinateur?");
             codeFromUser = getUtilities().getTheString();
+            logger.debug("l'utilisateur a saisi le code: "+codeFromUser);
             result = breakTheCode(codeFromUser, randomCode);
+            logger.debug("l'IA compare le code de l'utilisateur "+codeFromUser+ " avec son code: "+randomCode+" et donne la réponse: "+result);
             System.out.println("Proposition: " + codeFromUser + " ==> Réponse: " + result);
             nbTry++;
+            logger.debug("l'IA compare sa réponse "+result+" avec la solution "+ getUtilities().solution);
             if (result.equals(getUtilities().solution)) {
+                logger.debug("L'utilisateur a trouvé le code secret");
                 System.out.println("FELICITATTONS!!! Vous avez trouvé le code secret!");
                 break;
             }
@@ -74,9 +81,8 @@ public class ResearchGame {
      * @return a string composed of +,-,=
      */
     public String breakTheCode(String codeFromUser, String codeForIA) {
-        int codeSize=4;
         StringBuilder resultStringBuilder=new StringBuilder("");
-        for (int i=0;i<codeSize;i++){
+        for (int i=0;i<utilities.getCodeSize();i++){
             if (getUtilities().compareChar(codeFromUser.charAt(i),codeForIA.charAt(i))==0){
                 resultStringBuilder.append('=');
             }else if (getUtilities().compareChar(codeFromUser.charAt(i),codeForIA.charAt(i))==-1){
@@ -95,14 +101,18 @@ public class ResearchGame {
         int count = 0;
         String codeFromUser = utilities.getTheString();
         String proposition = String.valueOf((int) (Math.random() * Math.pow(10, getUtilities().getCodeSize())));
-        if (isDevMode()) System.out.println("la proposition de l'Ia est :"+proposition);
+        logger.debug("l'IA doit trouver le code: "+codeFromUser);
         System.out.println("Votre code secret est: " + codeFromUser);
         proposition = utilities.codeInShape(proposition);
+        if (isDevMode()) System.out.println("la proposition de l'Ia est :"+proposition);
+        logger.debug("l'IA propose le code :"+proposition);
         utilities.displayNbTour(nbTry+1);
         System.out.println("ATTENTION! il ne reste plus que: " + (getUtilities().getAllowedTry() - nbTry) + " essais à l'IA");
         System.out.println("L'IA propose le code suivant: " + proposition);
         nbTry++;
         String responseFromUser = utilities.getTheRechercheResponse();
+        logger.debug("L'utilisateur compare son code "+codeFromUser+ " a celui proposé par l'IA: "+proposition+" et a répondu: "+responseFromUser);
+        logger.debug("Le programme compare la réponse de l'utilisateur: "+responseFromUser+" à la solution: "+utilities.solution);
         if (responseFromUser.equals(utilities.solution)) {
             System.out.println("L'IA a trouvé le code!!");
             return;
@@ -110,17 +120,23 @@ public class ResearchGame {
         do {
 
             if (nbTry >= getUtilities().getAllowedTry()) {
+                logger.debug("nombre de tentative de l'IA dépasse le nombre autorisé");
                 System.out.println("FELICITATION!! Vous avez vaincu la machine");
                 break;
             } else {
                 utilities.displayNbTour(nbTry+1);
-                System.out.println("ATTENTION! il ne reste plus que: " + (5 - nbTry) + " essais à l'IA");
+                System.out.println("ATTENTION! il ne reste plus que: " + (getUtilities().getAllowedTry() - nbTry) + " essais");
             }
             proposition = iABreakYourCode(responseFromUser, proposition, count);
+            logger.debug("tours numéro: "+(nbTry+1));
+            logger.debug("suite à la réponse de l'utilisateur, la proposition de l'IA devient: "+proposition);
             System.out.println("l'IA propose le code  suivant: " + proposition);
             responseFromUser = utilities.getTheRechercheResponse();
+            logger.debug("L'utilisateur compare son code "+codeFromUser+ " a celui proposé par l'IA: "+proposition+" et a répondu: "+responseFromUser);
+            logger.debug("Le programme compare la réponse de l'utilisateur: "+responseFromUser+" à la solution: "+utilities.solution);
             if (responseFromUser.equals(utilities.solution)) {
                 System.out.println("L'IA a trouvé le code!!");
+                logger.debug("L'IA a trouvé le code!!");
                 break;
             }
             nbTry++;
@@ -144,6 +160,8 @@ public class ResearchGame {
         codeAdapt.setLength(0);
 
         codeHistory.put(count,proposition);
+
+
         if (isDevMode()) System.out.println("l'historique des combinaisons de l'IA est :"+codeHistory.toString());
         for (int i = 0; i < responseFromUser.length(); i++) {
             if (responseFromUser.charAt(i) == '+') {
@@ -151,7 +169,7 @@ public class ResearchGame {
                 if (count >= 2 ){
                     if (valueOFCharInHM(count-1,i) > valueOFCharInHM(count,i)) {
                         number =(valueOFCharInHM(count-1,i)+ valueOFCharInHM(count,i)) / 2;
-                    }else{ if (valueOFCharInHM(count-2,i)>valueOFCharInHM(count-1,i))
+                    }else{ if (valueOFCharInHM(count-1,i)>valueOFCharInHM(count,i))
                             number =(valueOFCharInHM(count-2,i) + valueOFCharInHM(count-1,i)) / 2;
                             else number = (Character.getNumericValue(proposition.charAt(i)) + 9) / 2;
                     }
@@ -164,7 +182,7 @@ public class ResearchGame {
                     if (valueOFCharInHM(count-1,i) < valueOFCharInHM(count,i)) {
                         number = (valueOFCharInHM(count-1,i) +valueOFCharInHM(count,i)) / 2;
                     } else{
-                            if (valueOFCharInHM(count-2,i)<valueOFCharInHM(count-1,i)){
+                            if (valueOFCharInHM(count-1,i)<valueOFCharInHM(count,i)){
                             number =(valueOFCharInHM(count-2,i) + valueOFCharInHM(count-1,i)) / 2;
                             }else number = (Character.getNumericValue(proposition.charAt(i))) / 2;
 
@@ -177,6 +195,7 @@ public class ResearchGame {
                 codeAdapt.append(number);
             }
         }
+
         proposition = codeAdapt.toString();
         return proposition;
     }
@@ -198,44 +217,37 @@ public class ResearchGame {
     public void rechercheDuel(){
         codeHistory.clear();
         boolean victory=false;
+        String responseFromUser;
+        String codeFromUserFinding;
+        String result;
         int nbTours=1;
         System.out.println("--------------------------------------------------------------");
         System.out.println("Veuillez saisir votre code secret");
         String codeFromUser = utilities.getTheString();
         System.out.println("Votre code secret est: " + codeFromUser);
         String codeFromIA = String.valueOf((int) (Math.random() * (double)Math.pow(10,getUtilities().getCodeSize())));
-
-        String proposition=String.valueOf((int) (Math.random() * (double)Math.pow(10,getUtilities().getCodeSize())));
         codeFromIA=utilities.codeInShape(codeFromIA);
-        if (isDevMode()) System.out.println("la combinaison de l'Ia est :"+codeFromIA);
+        String proposition=String.valueOf((int) (Math.random() * (double)Math.pow(10,getUtilities().getCodeSize())));
         proposition=utilities.codeInShape(proposition);
-        if (isDevMode()) System.out.println("la proposition de l'Ia est :"+proposition);
-        System.out.println("L'IA a choisi son code secret");
-        System.out.println("--------------------------------------------------------------");
-        System.out.println("                       LE DUEL COMMENCE");
-        System.out.println("--------------------------------------------------------------");
-        System.out.println("TOUR NUMERO: "+ nbTours);
-        System.out.println("--------------------------------------------------------------");
-        System.out.println("l'IA propose le code  suivant: "+proposition);
-        String responseFromUser=utilities.getTheRechercheResponse();
-        proposition = iABreakYourCode(responseFromUser,proposition,nbTours-1);
-        System.out.println("que pensez vous être le code de la machine?");
-        String codeFromUserFinding = utilities.getTheString();
-        String result = breakTheCode(codeFromUserFinding, codeFromIA);
-        System.out.println("Proposition du joueur: " + codeFromUserFinding + " ==> Réponse: " + result);
-        victory=utilities.getTheResult(responseFromUser,result,codeFromIA);
+        utilities.letTheDuelBegin(isDevMode(),codeFromIA);
+        logger.debug("l'utilisateur a choisi son code secret: "+codeFromUser);
+        logger.debug("le code secret de l'IA est: "+codeFromIA);
         while (!victory){
-
-            nbTours++;
             utilities.displayNbTour(nbTours);
             System.out.println("l'IA propose le code  suivant: "+proposition);
+            logger.debug("l'IA propose le code: "+proposition);
             responseFromUser=utilities.getTheRechercheResponse();
-            proposition = iABreakYourCode(responseFromUser,proposition,nbTours-1);
+            logger.debug("la réponse de l'utilisateur sur la proposition de l'IA "+proposition+" sur son code secret "+codeFromUser+" est "+responseFromUser);
+            proposition = iABreakYourCode(responseFromUser,proposition,nbTours);
+            logger.debug("l'IA adapte sa proposition: "+proposition+" par rapport à la réponse de l'utilisateur: "+responseFromUser);
             System.out.println("que pensez-vous être le code de la machine?");
             codeFromUserFinding = utilities.getTheString();
             result = breakTheCode(codeFromUserFinding, codeFromIA);
+            logger.debug("l'utilisateur propose le code "+codeFromUserFinding+" et l'IA lui répond: "+result);
             System.out.println("Proposition du joueur: " + codeFromUserFinding + " ==> Réponse: " + result);
+            logger.debug("le programme vérifie si la réponse de l'utilisateur "+responseFromUser+ " ou la réponse de l'IA "+result+" correspond à la solution: "+getUtilities().solution);
             victory=utilities.getTheResult(responseFromUser,result,codeFromIA);
+            nbTours++;
         }
     }
 

@@ -4,15 +4,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Properties;
 
 
 
 public class Main {
 
-
-   // private final static Logger logger = LogManager.getLogger();
 
     public static void main(String[] args)throws FileNotFoundException{
 
@@ -40,14 +37,9 @@ public class Main {
             e.printStackTrace();
         }
 
-
-
-
         Utilities utilities = new Utilities(codeSize,allowedTry,numberOfColours,logger);
-        ResearchGame researchGame=new ResearchGame(utilities,devMode);
-        MasterMind masterMind= new MasterMind(utilities,devMode);
-
-
+        ResearchGame researchGame=new ResearchGame(utilities,devMode,logger);
+        MasterMind masterMind= new MasterMind(utilities,devMode,logger);
 
         boolean playAgain=true;
         int gameChoice;
@@ -78,7 +70,7 @@ public class Main {
                             playAgain=true;
                             break;
                         case 2:
-                            logger.info("l'utilisateur a choisi le mode Dééfenseur");
+                            logger.info("l'utilisateur a choisi le mode Défenseur");
                             while (playAgain){
                                 System.out.println("Jeu de recherche - mode Défenseur");
                                 logger.info("lancement d'une partie Recherche en  mode Défenseur");
@@ -143,7 +135,6 @@ public class Main {
                     }
                     break;
             }
-
         }
         System.out.println("Merci d'avoir joué! à bientôt");
         logger.info("fin du programme");

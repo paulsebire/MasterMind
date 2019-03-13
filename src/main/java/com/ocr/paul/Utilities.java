@@ -86,14 +86,14 @@ public class Utilities {
                     responseIsGood = true;
                 } else {
                     responseIsGood = false;
-                    System.out.println("Veuillez saisir un nombre compris  entre " + min + " et " + max);
-                    logger.warn("out of bound");
+                    System.out.println("Veuillez saisir un nombre compris entre " + min + " et " + max);
+                    logger.warn("out of bound: la saisie utilisateur "+number+" n'est pas comprise entre "+ min + " et " + max);
                 }
             } catch (InputMismatchException e) {
                 sc.next();
                 responseIsGood = false;
                 System.out.println("Veuillez saisir un nombre compris  entre " + min + " et " + max);
-                logger.warn("not an Integer");
+                logger.warn("not an Integer: la saisie utlilisateur n'est pas un nombre");
             }
         } while (!responseIsGood);
         return number;
@@ -117,11 +117,13 @@ public class Utilities {
                         } else {
                             responseIsGood = false;
                             System.out.println("le code ne peut contenir que des chiffres");
+                            logger.warn("la saisie utlisateur n'est pas composé uniquement de chiffres");
                             break;
                         }
                     }
                 } else {
                     responseIsGood = false;
+                    logger.warn("l'utilisateur n'a pas saisi le bon nombre de caractères");
                     System.out.println("Veuillez saisir " + getCodeSize() + " chiffres");
                 }
             } catch (InputMismatchException e) {
@@ -191,6 +193,7 @@ public class Utilities {
                         } else {
                             responseIsGood = false;
                             System.out.println("la réponse ne peut contenir que les symboles +,-,=");
+                            logger.warn("la réponse de l'utilisateur ne contient pas que les symboles +,-,=");
                             break;
                         }
                     }
@@ -198,6 +201,7 @@ public class Utilities {
                 } else {
                     responseIsGood = false;
                     System.out.println("Veuillez saisir " + getCodeSize() + " symboles (+,-,=)");
+                    logger.warn("l'utilisateur n'a pas saisi le bon nombre de caractères");
                 }
             } catch (InputMismatchException e) {
                 sc.next();
@@ -220,15 +224,18 @@ public class Utilities {
 
         if (responseFromUser.equals(solution) && result.equals(solution)) {
             System.out.println("\n"+"Il y a EGALITE");
+            logger.debug("EGALITE car la réponse de l'utilisateur "+responseFromUser+" et la réponse de l'IA "+result+" sont égales à la solution "+solution);
             return true;
         }
         if (responseFromUser.equals(solution)) {
             System.out.println("\n"+"L'IA a trouvé votre code, vous avez PERDU");
             System.out.println("La solution du code de la machine était: " + codeFromIA);
+            logger.debug("victoire de l'IA car seul la réponse de l'utilisateur "+responseFromUser+" est égale à la solution "+solution);
             return true;
         }
         if (result.equals(solution)) {
             System.out.println("\n"+"Vous avez trouvé le code de l'IA, vous avez GAGNE");
+            logger.debug("victoire de l'utilisateur car seul la réponse de l'IA "+result+" est égale à la solution "+solution);
             return true;
         }
         return false;
@@ -280,18 +287,20 @@ public class Utilities {
                                 responseIsGood = true;
                             } else {
                                 responseIsGood = false;
-                                System.out.println("1-le code ne peut contenir que les chiffres compris entre "+minColours+" et "+maxColours);
+                                System.out.println("le code ne peut contenir que les chiffres compris entre "+minColours+" et "+maxColours);
+                                logger.warn("out of bound: la saisie utilisateur "+number+" n'est pas comprise entre "+ minColours + " et " + maxColours);
                                 break;
                             }
                         } else {
                             responseIsGood = false;
-                            System.out.println("2-le code ne peut contenir que les chiffres compris entre "+minColours+" et "+maxColours);
+                            System.out.println("le code ne peut contenir que les chiffres compris entre "+minColours+" et "+maxColours);
+                            logger.warn("la saisie utilisateur "+stringFromUser.charAt(i)+" n'est pas un chiffre");
                             break;
                         }
                     }
                 } else {
                     responseIsGood = false;
-                    System.out.println("3-Veuillez saisir une combinaison de " + codeSize + " chiffres compris entre "+minColours+" et "+maxColours);
+                    System.out.println("Veuillez saisir une combinaison de " + codeSize + " chiffres compris entre "+minColours+" et "+maxColours);
                 }
             } catch (InputMismatchException e) {
                 responseIsGood = false;
@@ -311,17 +320,21 @@ public class Utilities {
      * @return
      */
     public  boolean getTheMastermindResultDuel (String codeFromUser, String proposition,String codeFromIA, boolean successUser){
+
         if (proposition.equals(codeFromUser)&& successUser){
             System.out.println("\n"+"Il y a EGALITE");
+            logger.debug("EGALITE");
             return true;
         }
         if (proposition.equals(codeFromUser)){
             System.out.println("\n"+"L'IA a trouvé votre code, vous avez PERDU");
-            System.out.println("La solution du code de la machnie était: "+ codeFromIA);
+            System.out.println("Le code secret de l'IA était: "+ codeFromIA);
+            logger.debug("L'IA a GAGNE");
             return true;
         }
         if (successUser){
             System.out.println("\n"+"Vous avez trouvé le code de l'IA, vous avez GAGNE");
+            logger.debug("L'utilisateur a GAGNE");
             return true;
         }return false;
     }
@@ -330,10 +343,13 @@ public class Utilities {
      * useless method in order to create interaction during mastermind defender
      */
     public  void askGoodColours(){
+        int fakeAnswer;
         System.out.println("Combien il y a-t-il de couleurs bien placées?");
-        getTheNumber(0,codeSize);
+        fakeAnswer=getTheNumber(0,codeSize);
+        logger.debug("FACTICE: l'utilisateur déclare qu'il y a "+fakeAnswer+" de couleurs bien placées");
         System.out.println("Combien il y a-t-il de couleurs mal placées?");
-        getTheNumber(0,codeSize);
+        fakeAnswer=getTheNumber(0,codeSize);
+        logger.debug("FACTICE: l'utilisateur déclare qu'il y a "+fakeAnswer+" de couleurs mal placées");
     }
 
     /**
@@ -343,6 +359,7 @@ public class Utilities {
     public  void displayNbTour (int nbTours){
         System.out.println("-------------------------------------------------------------");
         System.out.println("TOUR NUMERO: " + nbTours);
+        logger.debug("tours numéro: "+nbTours);
         System.out.println("-------------------------------------------------------------");
 
     }
@@ -387,6 +404,7 @@ public class Utilities {
             return true;
         } else{
             System.out.println("\n"+"DOMMAGE! vous n'avez pas trouvé la solution");
+            logger.debug("nombre d'essais possible dépassé");
             System.out.println("La solution était: "+codeFromIA);
             return false;
         }
@@ -414,5 +432,12 @@ public class Utilities {
                 return false;
         }
         return false;
+    }
+
+    public void letTheDuelBegin(boolean devMode, String codeFromIA){
+        if (devMode) System.out.println("la combinaison de l'Ia est :"+codeFromIA);
+        System.out.println("L'IA a choisi son code secret");
+        System.out.println("--------------------------------------------------------------");
+        System.out.println("                       LE DUEL COMMENCE");
     }
 }
