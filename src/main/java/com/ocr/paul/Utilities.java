@@ -29,7 +29,7 @@ public class Utilities {
         this.codeSize=codeSize;
         this.allowedTry=allowedTry;
         this.numberOfColours=numberOfColours;
-        this.solution=stringOfEquals(codeSize);
+        this.solution=stringOfEquals();
         this.logger=logger;
 
 
@@ -378,13 +378,12 @@ public class Utilities {
 
     /**
      * method which create a string composed of '=', of the length of the combination
-     * @param codeSize
      * @return
      */
-    public  String stringOfEquals (int codeSize){
+    public  String stringOfEquals (){
         StringBuilder equals = new StringBuilder();
 
-        for (int i=0;i<codeSize;i++){
+        for (int i=0;i<getCodeSize();i++){
             equals.append("=");
         }
         return equals.toString();

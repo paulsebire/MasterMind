@@ -132,12 +132,12 @@ public class MasterMind {
             nbTry++;
 
         }while (!codeFromIA.equals(codeFromUser)&& nbTry < getUtilities().getAllowedTry());
-        if (nbTry >= getUtilities().getAllowedTry()){
-            System.out.println("FELICITATIONS! l'ordinateur n'a pas réussi à trouver votre code.");
+        if (nbTry >= getUtilities().getAllowedTry()&&!codeFromIA.equals(codeFromUser)){
+            System.out.println("\n"+"FELICITATIONS! l'ordinateur n'a pas réussi à trouver votre code.");
             logger.debug("nombre d'essais possible dépassé");
         }
         if (codeFromIA.equals(codeFromUser)){
-            System.out.println("l'ordinateur à trouvé votre code: "+ codeFromUser);
+            System.out.println("\n"+"l'ordinateur à trouvé votre code: "+ codeFromUser);
             logger.debug("la proposition de l'IA "+codeFromIA+" correspond à la combinaison de l'utilisateur "+codeFromUser);
         }
 
