@@ -117,8 +117,7 @@ public class ResearchGame {
             System.out.println("L'IA a trouvé le code!!");
             return;
         }
-        do {
-
+        while (nbTry <= getUtilities().getAllowedTry() ){
             if (nbTry >= getUtilities().getAllowedTry()) {
                 logger.debug("nombre de tentative de l'IA dépasse le nombre autorisé");
                 System.out.println("FELICITATION!! Vous avez vaincu la machine");
@@ -141,7 +140,7 @@ public class ResearchGame {
             }
             nbTry++;
             count++;
-        } while (nbTry <= getUtilities().getAllowedTry() );
+        }
         codeHistory.clear();
         return;
 

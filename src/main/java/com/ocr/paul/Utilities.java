@@ -10,14 +10,14 @@ public class Utilities {
     private int codeSize;
     private int allowedTry;
     private int numberOfColours;
-
+    private Logger logger;
 
     Scanner sc = new Scanner(System.in);
     int number = 0;
     String solution="";
     int minColours;
     int maxColours;
-   Logger logger;
+
 
     /**
      * Constructor of the  CLass Utilities
@@ -426,6 +426,7 @@ public class Utilities {
             case 1: return true;
             case 2: return false;
             case 3:
+                System.out.println("Merci d'avoir joué! A bientôt.");
                 logger.info("programme quitté par l'utilisateur");
                 System.exit(0);
                 return false;
