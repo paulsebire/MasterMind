@@ -168,8 +168,10 @@ public class ResearchGame {
                 if (count >= 2 ){
                     if (valueOFCharInHM(count-1,i) > valueOFCharInHM(count,i)) {
                         number =(valueOFCharInHM(count-1,i)+ valueOFCharInHM(count,i)) / 2;
-                    }else{ if (valueOFCharInHM(count-1,i)>valueOFCharInHM(count,i))
-                            number =(valueOFCharInHM(count-2,i) + valueOFCharInHM(count-1,i)) / 2;
+                    }else{ if (valueOFCharInHM(count-1,i)<valueOFCharInHM(count,i)&&valueOFCharInHM(count-2,i)>valueOFCharInHM(count-1,i)){
+                        number =(valueOFCharInHM(count-2,i) + valueOFCharInHM(count,i)) / 2;
+                    }
+
                             else number = (Character.getNumericValue(proposition.charAt(i)) + 9) / 2;
                     }
                 }
@@ -181,8 +183,8 @@ public class ResearchGame {
                     if (valueOFCharInHM(count-1,i) < valueOFCharInHM(count,i)) {
                         number = (valueOFCharInHM(count-1,i) +valueOFCharInHM(count,i)) / 2;
                     } else{
-                            if (valueOFCharInHM(count-1,i)<valueOFCharInHM(count,i)){
-                            number =(valueOFCharInHM(count-2,i) + valueOFCharInHM(count-1,i)) / 2;
+                            if (valueOFCharInHM(count-1,i)>valueOFCharInHM(count,i)&&valueOFCharInHM(count-2,i)<valueOFCharInHM(count-1,i)){
+                            number =(valueOFCharInHM(count-2,i) + valueOFCharInHM(count,i)) / 2;
                             }else number = (Character.getNumericValue(proposition.charAt(i))) / 2;
 
                     }

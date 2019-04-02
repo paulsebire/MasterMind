@@ -115,7 +115,6 @@ public class Menu {
                     break;
                 case 3:
                     System.out.println("Merci d'avoir joué! à bientôt");
-                    logger.info("fin du programme");
                     return;
             }
         }

@@ -43,6 +43,7 @@ public class Main {
         Menu menu = new Menu(utilities,researchGame,masterMind,logger);
 
         menu.setTheMenu();
-
+        logger.info("fin du programme");
     }
+
 }
