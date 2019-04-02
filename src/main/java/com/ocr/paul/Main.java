@@ -29,7 +29,7 @@ public class Main {
             allowedTry = Integer.parseInt(prop.getProperty("allowedTry", "5"));
             numberOfColours = Integer.parseInt(prop.getProperty("numberOfColours", "4"));
 
-            if (args==null) devMode=true;
+            if (args.length>0) devMode=true;
             else if (prop.getProperty("devMode","false").equals("true"))devMode=true;
                 else devMode=false;
         }
