@@ -2,14 +2,24 @@ package com.ocr.paul;
 
 import org.apache.logging.log4j.Logger;
 
-
+/**
+ * This class manage the main menu and the possibility to play again
+ * it uses an instances of each class
+ * and the logger
+ */
 public class Menu {
     private Utilities utilities;
     private ResearchGame researchGame;
     private MasterMind masterMind;
     private Logger logger;
 
-
+    /**
+     * constructor of the menu class
+     * @param utilities: an instance of the utilities class
+     * @param researchGame: an instance of the research game class
+     * @param masterMind: an instance of the mastermind game class
+     * @param logger: manage the logs
+     */
     public Menu(Utilities utilities, ResearchGame researchGame, MasterMind masterMind, Logger logger) {
         this.utilities = utilities;
         this.researchGame = researchGame;
@@ -17,6 +27,9 @@ public class Menu {
         this.logger = logger;
     }
 
+    /**
+     * this method display and manage the choice of game and the choice of mode
+     */
     public void setTheMenu(){
 
         boolean playAgain=true;

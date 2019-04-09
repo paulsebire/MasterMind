@@ -1,5 +1,12 @@
 package com.ocr.paul;
 import org.apache.logging.log4j.Logger;
+
+/**
+ * Class who manage the entire mastermind game.
+ * attributes are an instance of the utilities CLass
+ * the boolean DevMode collected from thr config file allow some display
+ * and the looger in order to create the log file
+ */
 public class MasterMind {
 
     private Utilities utilities;

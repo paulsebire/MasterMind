@@ -3,7 +3,10 @@ package com.ocr.paul;
 import java.util.HashMap;
 import org.apache.logging.log4j.Logger;
 
-
+/**
+ * this class manage the research game in all modes
+ * it uses an instance of the utilities class and the logger
+ */
 public class ResearchGame {
 
     private Utilities utilities;
@@ -21,6 +24,7 @@ public class ResearchGame {
      * Constructor of Mastermind's class
      * @param utilities is an instance of Utilities'class
      * @param devMode will be use in order to allow display
+     * and the logger
      */
 
     public ResearchGame(Utilities utilities, boolean devMode, Logger logger) {

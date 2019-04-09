@@ -2,9 +2,13 @@ package com.ocr.paul;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
-//import java.util.logging.Logger;
 import static java.lang.Character.isDigit;
 import org.apache.logging.log4j.Logger;
+
+/**
+ * this class manage all the methods that are not involved in the core of the different games
+ * it has different type of methods: display, seizure, comparison, choice to play again
+ */
 public class Utilities {
 
     private int codeSize;
