@@ -13,7 +13,7 @@ public class Main {
 
     public static void main(String[] args)throws FileNotFoundException{
 
-        final  Logger logger = LogManager.getLogger();
+        final Logger logger = LogManager.getLogger();
         logger.info("démarrage du programme");
         int codeSize=0;
         int allowedTry=0;

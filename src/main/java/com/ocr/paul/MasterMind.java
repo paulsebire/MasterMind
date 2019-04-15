@@ -18,6 +18,7 @@ public class MasterMind {
      * Constructor of Mastermind's class
      * @param utilities is an instance of Utilities'class
      * @param devMode will be use in order to allow display
+     * @param logger: the logger
      */
     public MasterMind(Utilities utilities, boolean devMode, Logger logger) {
         this.utilities = utilities;
@@ -76,8 +77,8 @@ public class MasterMind {
 
     /**
      * this method compare the strings in parameter
-     * @param codeFromIA
-     * @param codeFromUser
+     * @param codeFromIA: secret code from IA
+     * @param codeFromUser: user's proposition
      * @return true if the two strings are the same
      */
     public boolean mastermindChallenger (String codeFromIA, String codeFromUser){
@@ -153,8 +154,8 @@ public class MasterMind {
 
     /**
      * the method compare the two strings in parameter, if unmatching char it is replaced by a random number
-     * @param codeFromUser
-     * @param codeFromIA
+     * @param codeFromUser: secret code from user
+     * @param codeFromIA: IA's proposition
      * @return codeFromIA adapted to the user response
      */
     public String mastermindDefender (String codeFromUser, String codeFromIA){

@@ -24,7 +24,7 @@ public class ResearchGame {
      * Constructor of Mastermind's class
      * @param utilities is an instance of Utilities'class
      * @param devMode will be use in order to allow display
-     * and the logger
+     * @param logger : the logger
      */
 
     public ResearchGame(Utilities utilities, boolean devMode, Logger logger) {
@@ -80,8 +80,8 @@ public class ResearchGame {
 
     /**
      * this method compare the two strings in parameter
-     * @param codeFromUser
-     * @param codeForIA
+     * @param codeFromUser: string with the user's code
+     * @param codeForIA: string with the IA's code
      * @return a string composed of +,-,=
      */
     public String breakTheCode(String codeFromUser, String codeForIA) {
@@ -207,8 +207,8 @@ public class ResearchGame {
 
     /**
      * convert a char from hashmap in integer
-     * @param key
-     * @param i
+     * @param key : position in hashmap
+     * @param i : position of the character in the string a the position key
      * @return an integer of the char i in the hashmap indice key
      */
     public int valueOFCharInHM (int key, int i){

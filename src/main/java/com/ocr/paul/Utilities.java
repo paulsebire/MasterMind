@@ -28,6 +28,7 @@ public class Utilities {
      * @param codeSize determine the length of the combination
      * @param allowedTry determine the number of allowed try
      * @param numberOfColours determine the number of colours in the mastermind
+     * @param logger: the logger
      */
     public Utilities(int codeSize, int allowedTry, int numberOfColours, Logger logger) {
         this.codeSize=codeSize;
@@ -64,10 +65,9 @@ public class Utilities {
         return numberOfColours;
     }
     /**
-     * setter of the integer numberofcolours,
+     * @param numberOfColours set the number of colours,
      * which determine the number of different colours that will be use in mastermind
      * this value must be between 4 and 10
-     * @return the number of colours in mastermind
      */
     public void setNumberOfColours(int numberOfColours) {
         this.numberOfColours = numberOfColours;
@@ -76,8 +76,8 @@ public class Utilities {
 
     /**
      * get the user's input, input must be an integer between min and max
-     * @param min
-     * @param max
+     * @param min: minimum value of asked integer
+     * @param max: maximum value of asked integer
      * @return an input integer between min and max
      */
     public int getTheNumber(int min, int max) {
@@ -142,8 +142,8 @@ public class Utilities {
     /**
      * this method will return a string composed of one integer
      * its length will be equal to the combination length
-     * @param minOrMax
-     * @return
+     * @param minOrMax: value of the integer which will be repeated ie:0 for 0000 or 9 for 9999
+     * @return a string composed of several integer
      */
     public String codeBound(int minOrMax) {
         String bound = "";
@@ -162,8 +162,8 @@ public class Utilities {
      * this method will verify and fix the proposition if its length is too short
      * only used when the proposition length is too short because proposition is build by
      * an random integer
-     * @param proposition
-     * @return
+     * @param proposition: this method get a string in param and make sure the string have the good size
+     * @return the string proposition at the good length
      */
     public String codeInShape(String proposition) {
         StringBuilder codeStringBuilder = new StringBuilder();
@@ -222,7 +222,7 @@ public class Utilities {
      * @param responseFromUser string composed of +,-,= from user
      * @param result string composed of +,-,= from IA
      * @param codeFromIA string of integer that user must find
-     * @return
+     * @return true in case of victory or equality
      */
     public  boolean getTheResult(String responseFromUser, String result, String codeFromIA) {
 
@@ -263,7 +263,7 @@ public class Utilities {
 
     /**
      * this method create a string composed of random numbers in the authorized interval of colours
-     * @return
+     * @return a string composed of random integer for the mastermind game
      */
     public  String getTheRandomColours() {
         StringBuilder tempColours = new StringBuilder();
@@ -276,7 +276,7 @@ public class Utilities {
 
     /**
      * get the user's input, input a serial of integer in the authorized interval stock in a string
-     * @return
+     * @return a string composed of integer selected by user for the mastermind game
      */
     public  String getTheColours() {
         String stringFromUser = "";
@@ -321,7 +321,7 @@ public class Utilities {
      * @param proposition combination porposed by IA
      * @param codeFromIA secret code from IA
      * @param successUser boolean which state if the user has found the codeFromIA
-     * @return
+     * @return true in case of victory or equality
      */
     public  boolean getTheMastermindResultDuel (String codeFromUser, String proposition,String codeFromIA, boolean successUser){
 
@@ -358,7 +358,7 @@ public class Utilities {
 
     /**
      * this method display the number of plays
-     * @param nbTours
+     * @param nbTours integer who represent the number of round
      */
     public  void displayNbTour (int nbTours){
         System.out.println("-------------------------------------------------------------");
@@ -372,7 +372,7 @@ public class Utilities {
      * this method compare the integer value of two char
      * @param a a char from a string
      * @param b a char from a string
-     * @return 0 if equals, 1 if a > b, and -1 if b > a
+     * @return 0 if equals, 1 if a greater than b, and -1 if b greater than a
      */
     public  int compareChar (char a, char b){
         if (Character.getNumericValue(a)==Character.getNumericValue(b))return 0;
@@ -382,7 +382,7 @@ public class Utilities {
 
     /**
      * method which create a string composed of '=', of the length of the combination
-     * @return
+     * @return a string of '=' of the desired length
      */
     public  String stringOfEquals (){
         StringBuilder equals = new StringBuilder();
@@ -397,7 +397,7 @@ public class Utilities {
      * display the number of remaining allowed try
      * @param nbTry number of current try
      * @param codeFromIA in case of lose, display the code that the user didn't find
-     * @return
+     * @return true if the number of try is ok
      */
     public  boolean allowedToPlay (int nbTry, String codeFromIA){
 
