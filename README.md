@@ -6,7 +6,7 @@ From IntelliJ: you have to go on the Maven runtime window and run the command ->
 <br/>
 ###Launch of the IntelliJ console application
 first of all you have to go in the folder who contains the jar file with the "cd" command then:<br/>
-•	in debug mode execute the command: (you can replace "dev" by whatever you want)<br/>
+•	in Dev mode execute the command: (you can replace "dev" by whatever you want)<br/>
 java -Dfile.encoding=UTF-8 -jar mastermind-1.0-SNAPSHOT.jar dev <br/>
 •	in player mode execute the command: <br/>
 java -Dfile.encoding=UTF-8 -jar mastermind-1.0-SNAPSHOT.jar <br/>
