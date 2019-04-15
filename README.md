@@ -15,7 +15,7 @@ java -Dfile.encoding=UTF-8 -jar mastermind-1.0-SNAPSHOT.jar <br/>
 •	double click on mastermind.bat<br/>
 •	and enjoy!<br/>
 •	N.B.: if you want to execute in dev mode, you'll have to modify the .bat file by adding something at the end of the line<br/>
-I.E.: java -Dfile.encoding=UTF-8 -jar mastermind-1.0-SNAPSHOT.jar dev<br/>
+E.G.: java -Dfile.encoding=UTF-8 -jar mastermind-1.0-SNAPSHOT.jar dev<br/>
 
 ###How to Generate the Javadoc ?
 In the Maven runtime window by running the command -> javadoc:javadoc <br/>
