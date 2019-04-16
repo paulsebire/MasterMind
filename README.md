@@ -6,16 +6,18 @@ From IntelliJ: you have to go on the Maven runtime window and run the command ->
 <br/>
 ###Launch of the IntelliJ console application
 first of all you have to go in the folder who contains the jar file with the "cd" command then:<br/>
-•	in Dev mode execute the command: (you can replace "dev" by whatever you want)<br/>
-java -Dfile.encoding=UTF-8 -jar mastermind-1.0-SNAPSHOT.jar dev <br/>
-•	in player mode execute the command: <br/>
-java -Dfile.encoding=UTF-8 -jar mastermind-1.0-SNAPSHOT.jar <br/>
+• in Dev mode execute the command: (you can replace "dev" by whatever you want)
+
+
+    java -Dfile.encoding=UTF-8 -jar mastermind-1.0-SNAPSHOT.jar dev 
+• in player mode execute the command :<br/>
+
+
+    java -Dfile.encoding=UTF-8 -jar mastermind-1.0-SNAPSHOT.jar
 ###Launching the application in a specific directory:
 •	extract the archive mastermind.zip in a directory <br/>
-•	double click on mastermind.bat<br/>
+•	double click on mastermind.bat or mastermind- DevMode<br/>
 •	and enjoy!<br/>
-•	N.B.: if you want to execute in dev mode, you'll have to modify the .bat file by adding something at the end of the line<br/>
-E.G.: java -Dfile.encoding=UTF-8 -jar mastermind-1.0-SNAPSHOT.jar dev<br/>
 
 ###How to Generate the Javadoc ?
 In the Maven runtime window by running the command -> javadoc:javadoc <br/>

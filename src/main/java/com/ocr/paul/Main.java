@@ -7,7 +7,10 @@ import java.io.FileNotFoundException;
 import java.util.Properties;
 
 
-
+/**
+ *this class is the entry of the program. this class manage all the instantiating of all other class.
+ * @param args: used to pass in dev mode
+ */
 public class Main {
 
 
