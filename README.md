@@ -4,6 +4,7 @@ How to compile the application ?
 -
 From IntelliJ: you have to go on the Maven runtime window and run the command -> clean install
 <br/>
+if you want to change the configuration you have to edit the file config.properties
 ###Launch of the IntelliJ console application
 first of all you have to go in the folder who contains the jar file with the "cd" command then:<br/>
 • in Dev mode execute the command: (you can replace "dev" by whatever you want)
